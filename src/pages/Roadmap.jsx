@@ -49,7 +49,7 @@ export default function Roadmap() {
     {
       year: '2027-28',
       quarter: 'Q3+',
-      title: 'Wave 2',
+      title: 'Расширение направлений',
       status: 'future',
       items: [
         'Лаборатория Биотехнологий',
@@ -58,6 +58,19 @@ export default function Roadmap() {
         'Окупаемость проекта',
       ],
       color: 'cyan'
+    },
+    {
+      year: '2029+',
+      quarter: '',
+      title: 'R&D Marketplace',
+      status: 'future',
+      items: [
+        'Открытая платформа для заказчиков',
+        'Подключение других вузов',
+        'Маркетплейс задач и компетенций',
+        'Сетевой эффект масштабирования',
+      ],
+      color: 'orange'
     },
   ]
 
@@ -69,6 +82,7 @@ export default function Roadmap() {
     { date: 'Июнь 2027', event: '50 модулей в библиотеке', done: false },
     { date: 'Декабрь 2027', event: 'Запуск Wave 2', done: false },
     { date: '2028', event: 'Выход на окупаемость', done: false },
+    { date: '2029', event: 'Запуск R&D Marketplace', done: false },
   ]
 
   const colorClasses = {
@@ -76,6 +90,7 @@ export default function Roadmap() {
     blue: 'from-blue-500 to-blue-600 border-blue-500/30 bg-blue-500/10',
     purple: 'from-purple-500 to-purple-600 border-purple-500/30 bg-purple-500/10',
     cyan: 'from-cyan-500 to-cyan-600 border-cyan-500/30 bg-cyan-500/10',
+    orange: 'from-orange-500 to-orange-600 border-orange-500/30 bg-orange-500/10',
   }
 
   return (
@@ -103,13 +118,13 @@ export default function Roadmap() {
             <span className="gradient-text from-cyan-400 to-blue-400">развития</span>
           </h2>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto">
-            Поэтапное развитие экосистемы: от запуска первых лабораторий 
-            до полноценной платформы с пятью направлениями
+            Поэтапное развитие: от закрытых лабораторий с якорными партнёрами
+            до открытой R&D платформы с маркетплейсом задач
           </p>
         </motion.div>
 
         {/* Timeline phases */}
-        <div className="grid md:grid-cols-4 gap-6 mb-16">
+        <div className="grid md:grid-cols-5 gap-6 mb-16">
           {phases.map((phase, i) => (
             <motion.div
               key={i}
@@ -172,7 +187,7 @@ export default function Roadmap() {
             <div className="absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-emerald-500 via-blue-500 to-cyan-500 md:hidden" />
             <div className="hidden md:block absolute top-4 left-0 right-0 h-px bg-gradient-to-r from-emerald-500 via-blue-500 to-cyan-500" />
 
-            <div className="grid md:grid-cols-7 gap-4 md:gap-2">
+            <div className="grid md:grid-cols-8 gap-4 md:gap-2">
               {milestones.map((milestone, i) => (
                 <div key={i} className="relative pl-10 md:pl-0 md:text-center">
                   {/* Dot */}
