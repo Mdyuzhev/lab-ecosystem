@@ -5,6 +5,11 @@ import Home from './pages/Home'
 import AILab from './pages/labs/AILab'
 import SoftwareLab from './pages/labs/SoftwareLab'
 import RoboticsLab from './pages/labs/RoboticsLab'
+import Modules from './pages/outputs/Modules'
+import Robots from './pages/outputs/Robots'
+import Software from './pages/outputs/Software'
+import Talents from './pages/outputs/Talents'
+import IP from './pages/outputs/IP'
 
 function App() {
   return (
@@ -16,6 +21,11 @@ function App() {
           <Route path="/labs/ai" element={<AILab />} />
           <Route path="/labs/software" element={<SoftwareLab />} />
           <Route path="/labs/robotics" element={<RoboticsLab />} />
+          <Route path="/outputs/modules" element={<Modules />} />
+          <Route path="/outputs/robots" element={<Robots />} />
+          <Route path="/outputs/software" element={<Software />} />
+          <Route path="/outputs/talents" element={<Talents />} />
+          <Route path="/outputs/ip" element={<IP />} />
         </Routes>
         <Footer />
       </div>

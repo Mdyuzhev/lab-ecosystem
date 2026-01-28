@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { ArrowDown, ArrowUp, ArrowRight, Building2, GraduationCap, Scale, Brain, Monitor, Bot, Package, Wrench, Briefcase, FileText } from 'lucide-react'
 
 export default function Ecosystem() {
@@ -181,17 +182,19 @@ export default function Ecosystem() {
             </h4>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
               {[
-                { icon: Wrench, title: 'Модули', desc: 'OSS + Premium', color: 'emerald' },
-                { icon: Bot, title: 'Роботы', desc: 'Прототипы', color: 'purple' },
-                { icon: Briefcase, title: 'ПО', desc: 'SaaS', color: 'blue' },
-                { icon: GraduationCap, title: 'Кадры', desc: '→ РТК', color: 'amber' },
-                { icon: FileText, title: 'IP', desc: 'Патенты', color: 'cyan' },
-              ].map((item, i) => (
-                <div key={i} className="glass rounded-xl p-4 text-center">
-                  <item.icon className={`w-6 h-6 mx-auto mb-2 text-${item.color}-400`} />
-                  <div className="font-semibold text-sm">{item.title}</div>
-                  <div className="text-xs text-yellow-400">{item.desc}</div>
-                </div>
+                { icon: Wrench, title: 'Модули', desc: 'OSS + Premium', color: 'emerald', path: '/outputs/modules' },
+                { icon: Bot, title: 'Роботы', desc: 'Прототипы', color: 'purple', path: '/outputs/robots' },
+                { icon: Briefcase, title: 'ПО', desc: 'SaaS', color: 'blue', path: '/outputs/software' },
+                { icon: GraduationCap, title: 'Кадры', desc: '→ РТК', color: 'amber', path: '/outputs/talents' },
+                { icon: FileText, title: 'IP', desc: 'Патенты', color: 'cyan', path: '/outputs/ip' },
+              ].map((item) => (
+                <Link key={item.title} to={item.path}>
+                  <div className="glass rounded-xl p-4 text-center hover:border-emerald-500/30 transition-all cursor-pointer hover:scale-105">
+                    <item.icon className={`w-6 h-6 mx-auto mb-2 text-${item.color}-400`} />
+                    <div className="font-semibold text-sm">{item.title}</div>
+                    <div className="text-xs text-yellow-400">{item.desc}</div>
+                  </div>
+                </Link>
               ))}
             </div>
           </div>
