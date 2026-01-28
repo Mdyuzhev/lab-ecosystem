@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import SmoothScroll from './components/SmoothScroll';
 import Hero from './pages/Hero';
 import About from './pages/About';
 import Labs from './pages/Labs';
@@ -34,17 +35,19 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white">
-      <Navbar activeSection={activeSection} />
-      <Hero />
-      <About />
-      <Labs />
-      <Ecosystem />
-      <Economics />
-      <Roadmap />
-      <Team />
-      <Footer />
-    </div>
+    <SmoothScroll>
+      <div className="min-h-screen bg-slate-900 text-white">
+        <Navbar activeSection={activeSection} />
+        <Hero />
+        <About />
+        <Labs />
+        <Ecosystem />
+        <Economics />
+        <Roadmap />
+        <Team />
+        <Footer />
+      </div>
+    </SmoothScroll>
   );
 }
 
