@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { Target, Lightbulb, Rocket, Users } from 'lucide-react'
+import { Target, Lightbulb, Rocket, Users, Brain, Ruler, Wrench, CheckCircle } from 'lucide-react'
 
 export default function About() {
   const ref = useRef(null)
@@ -118,7 +118,7 @@ export default function About() {
               <div className="relative glass rounded-2xl p-6">
                 <div className="text-center mb-6">
                   <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 mb-3">
-                    <span className="text-3xl">🧠</span>
+                    <Brain className="w-8 h-8 text-white" />
                   </div>
                   <div className="font-semibold">Claude / GPT-4</div>
                   <div className="text-sm text-slate-400">Создаёт инструменты</div>
@@ -129,10 +129,14 @@ export default function About() {
                 </div>
                 
                 <div className="grid grid-cols-3 gap-3">
-                  {['📐 Расчёты', '🔧 Генераторы', '✅ Валидаторы'].map((item, i) => (
+                  {[
+                    { icon: Ruler, label: 'Расчёты' },
+                    { icon: Wrench, label: 'Генераторы' },
+                    { icon: CheckCircle, label: 'Валидаторы' }
+                  ].map((item, i) => (
                     <div key={i} className="bg-slate-800 rounded-lg p-3 text-center text-sm">
-                      <div className="mb-1">{item.split(' ')[0]}</div>
-                      <div className="text-slate-400 text-xs">{item.split(' ')[1]}</div>
+                      <item.icon className="w-5 h-5 mx-auto mb-1 text-emerald-400" />
+                      <div className="text-slate-400 text-xs">{item.label}</div>
                     </div>
                   ))}
                 </div>

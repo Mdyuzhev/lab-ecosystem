@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Github, Linkedin, Mail, ExternalLink } from 'lucide-react'
+import { Github, Linkedin, Mail, ExternalLink, FlaskConical } from 'lucide-react'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -15,7 +15,7 @@ export default function Footer() {
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center">
-                <span className="text-2xl">🔬</span>
+                <FlaskConical className="w-6 h-6 text-white" />
               </div>
               <div>
                 <div className="font-display font-bold text-xl">R&D Экосистема</div>

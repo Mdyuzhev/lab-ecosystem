@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Cpu, Code, Bot, FlaskConical, Atom, ArrowRight } from 'lucide-react'
+import { Cpu, Code, Bot, FlaskConical, Atom, ArrowRight, DollarSign, Plug } from 'lucide-react'
 
 export default function Labs() {
   const ref = useRef(null)
@@ -165,7 +165,9 @@ export default function Labs() {
                     </div>
                   </div>
                   <div>
-                    <div className="text-sm font-semibold mb-2 text-yellow-400">💰 Монетизация:</div>
+                    <div className="text-sm font-semibold mb-2 text-yellow-400 flex items-center gap-1">
+                                      <DollarSign className="w-4 h-4" /> Монетизация:
+                                    </div>
                     <ul className="text-sm text-slate-400 space-y-1">
                       {lab.money.map((item, j) => (
                         <li key={j}>• {item}</li>
@@ -226,7 +228,7 @@ export default function Labs() {
           {/* Platform note */}
           <div className="mt-6 text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20">
-              <span className="text-lg">🔌</span>
+              <Plug className="w-5 h-5 text-cyan-400" />
               <span className="text-cyan-400 text-sm">
                 Plug & Play: новые лабы подключаются к готовой инфраструктуре
               </span>

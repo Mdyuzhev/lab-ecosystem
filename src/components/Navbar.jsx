@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, FlaskConical } from 'lucide-react'
 
 const navItems = [
   { id: 'hero', label: 'Главная' },
@@ -50,7 +50,7 @@ export default function Navbar({ activeSection }) {
             onClick={() => scrollToSection('hero')}
           >
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center">
-              <span className="text-xl">🔬</span>
+              <FlaskConical className="w-5 h-5 text-white" />
             </div>
             <div className="hidden sm:block">
               <div className="font-display font-bold text-lg">R&D Labs</div>

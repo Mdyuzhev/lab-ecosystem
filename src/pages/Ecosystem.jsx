@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { ArrowDown, ArrowUp, ArrowRight } from 'lucide-react'
+import { ArrowDown, ArrowUp, ArrowRight, Building2, GraduationCap, Scale, Brain, Monitor, Bot, Package, Wrench, Briefcase, FileText } from 'lucide-react'
 
 export default function Ecosystem() {
   const ref = useRef(null)
@@ -47,7 +47,7 @@ export default function Ecosystem() {
             <div className="glass rounded-xl p-4 w-56">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
-                  <span className="text-xl">🏢</span>
+                  <Building2 className="w-5 h-5 text-blue-400" />
                 </div>
                 <div>
                   <div className="font-semibold text-blue-400">Ростелеком</div>
@@ -60,7 +60,7 @@ export default function Ecosystem() {
             <div className="glass rounded-xl p-4 w-56">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
-                  <span className="text-xl">🎓</span>
+                  <GraduationCap className="w-5 h-5 text-purple-400" />
                 </div>
                 <div>
                   <div className="font-semibold text-purple-400">Политех</div>
@@ -88,7 +88,7 @@ export default function Ecosystem() {
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center">
-                  <span className="text-2xl">⚖️</span>
+                  <Scale className="w-6 h-6 text-white" />
                 </div>
                 <div>
                   <div className="font-bold text-lg">Управляющий комитет</div>
@@ -122,9 +122,9 @@ export default function Ecosystem() {
           {/* Labs */}
           <div className="grid md:grid-cols-3 gap-4 mb-8">
             {[
-              { icon: '🧠', title: 'Лаборатория ИИ', subtitle: 'Фабрика инструментов', color: 'emerald' },
-              { icon: '💻', title: 'Лаборатория ПО', subtitle: 'Быстрые прототипы', color: 'blue' },
-              { icon: '🤖', title: 'Лаб. Робототехники', subtitle: 'Железо + интеллект', color: 'purple' },
+              { icon: Brain, title: 'Лаборатория ИИ', subtitle: 'Фабрика инструментов', color: 'emerald' },
+              { icon: Monitor, title: 'Лаборатория ПО', subtitle: 'Быстрые прототипы', color: 'blue' },
+              { icon: Bot, title: 'Лаб. Робототехники', subtitle: 'Железо + интеллект', color: 'purple' },
             ].map((lab, i) => (
               <motion.div
                 key={i}
@@ -132,7 +132,7 @@ export default function Ecosystem() {
                 className={`glass rounded-xl p-4 border border-${lab.color}-500/30`}
               >
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="text-2xl">{lab.icon}</span>
+                  <lab.icon className={`w-6 h-6 text-${lab.color}-400`} />
                   <div>
                     <div className="font-semibold text-sm">{lab.title}</div>
                     <div className={`text-xs text-${lab.color}-400`}>{lab.subtitle}</div>
@@ -176,17 +176,19 @@ export default function Ecosystem() {
 
           {/* Outputs */}
           <div className="bg-gradient-to-r from-emerald-500/10 to-yellow-500/10 rounded-2xl p-6 border border-emerald-500/20">
-            <h4 className="text-center text-emerald-400 font-semibold mb-6">📦 Выходы экосистемы</h4>
+            <h4 className="text-center text-emerald-400 font-semibold mb-6 flex items-center justify-center gap-2">
+              <Package className="w-5 h-5" /> Выходы экосистемы
+            </h4>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
               {[
-                { icon: '🛠️', title: 'Модули', desc: 'OSS + Premium' },
-                { icon: '🤖', title: 'Роботы', desc: 'Прототипы' },
-                { icon: '💼', title: 'ПО', desc: 'SaaS' },
-                { icon: '🎓', title: 'Кадры', desc: '→ РТК' },
-                { icon: '📜', title: 'IP', desc: 'Патенты' },
+                { icon: Wrench, title: 'Модули', desc: 'OSS + Premium', color: 'emerald' },
+                { icon: Bot, title: 'Роботы', desc: 'Прототипы', color: 'purple' },
+                { icon: Briefcase, title: 'ПО', desc: 'SaaS', color: 'blue' },
+                { icon: GraduationCap, title: 'Кадры', desc: '→ РТК', color: 'amber' },
+                { icon: FileText, title: 'IP', desc: 'Патенты', color: 'cyan' },
               ].map((item, i) => (
                 <div key={i} className="glass rounded-xl p-4 text-center">
-                  <div className="text-2xl mb-2">{item.icon}</div>
+                  <item.icon className={`w-6 h-6 mx-auto mb-2 text-${item.color}-400`} />
                   <div className="font-semibold text-sm">{item.title}</div>
                   <div className="text-xs text-yellow-400">{item.desc}</div>
                 </div>

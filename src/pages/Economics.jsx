@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { TrendingUp, TrendingDown, DollarSign, PiggyBank, Rocket } from 'lucide-react'
+import { TrendingUp, TrendingDown, DollarSign, PiggyBank, Rocket, BarChart3, Coins, GraduationCap } from 'lucide-react'
 
 export default function Economics() {
   const ref = useRef(null)
@@ -160,13 +160,13 @@ export default function Economics() {
           className="grid grid-cols-2 md:grid-cols-4 gap-4"
         >
           {[
-            { icon: '📊', value: '18-24', unit: 'мес', label: 'Срок окупаемости' },
-            { icon: '💰', value: '1.5-2×', unit: '', label: 'ROI к 2028' },
-            { icon: '📈', value: '70%', unit: '', label: 'Доля РТК в IP' },
-            { icon: '🎓', value: '30%', unit: '', label: 'Доля ВУЗа в IP' },
+            { icon: BarChart3, value: '18-24', unit: 'мес', label: 'Срок окупаемости', color: 'cyan' },
+            { icon: Coins, value: '1.5-2×', unit: '', label: 'ROI к 2028', color: 'yellow' },
+            { icon: TrendingUp, value: '70%', unit: '', label: 'Доля РТК в IP', color: 'blue' },
+            { icon: GraduationCap, value: '30%', unit: '', label: 'Доля ВУЗа в IP', color: 'purple' },
           ].map((metric, i) => (
             <div key={i} className="glass rounded-xl p-4 text-center">
-              <div className="text-2xl mb-2">{metric.icon}</div>
+              <metric.icon className={`w-6 h-6 mx-auto mb-2 text-${metric.color}-400`} />
               <div className="text-2xl font-bold gradient-text from-yellow-400 to-amber-400">
                 {metric.value}<span className="text-base">{metric.unit}</span>
               </div>

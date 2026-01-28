@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Users, Building, GraduationCap, Mail, Linkedin } from 'lucide-react'
+import { Users, Building, GraduationCap, Mail, Linkedin, Scale, UsersRound } from 'lucide-react'
 
 export default function Team() {
   const ref = useRef(null)
@@ -117,8 +117,8 @@ export default function Team() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-16"
         >
-          <h3 className="text-2xl font-bold text-center mb-8">
-            <span className="text-amber-400">⚖️</span> Управляющий комитет
+          <h3 className="text-2xl font-bold text-center mb-8 flex items-center justify-center gap-2">
+            <Scale className="w-6 h-6 text-amber-400" /> Управляющий комитет
           </h3>
           
           <div className="grid md:grid-cols-5 gap-4">
@@ -162,8 +162,8 @@ export default function Team() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <h3 className="text-2xl font-bold text-center mb-8">
-            <span className="text-emerald-400">👥</span> Команды лабораторий
+          <h3 className="text-2xl font-bold text-center mb-8 flex items-center justify-center gap-2">
+            <UsersRound className="w-6 h-6 text-emerald-400" /> Команды лабораторий
           </h3>
 
           <div className="grid md:grid-cols-3 gap-6">
