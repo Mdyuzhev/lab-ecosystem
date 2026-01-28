@@ -16,6 +16,7 @@
       "Bash(cp:*)",
       "Bash(mv:*)",
       "Bash(du:*)",
+      "WebFetch(domain:localhost)",
       "Read",
       "Write",
       "Edit",

@@ -1,97 +1,67 @@
-# TASK: Развернуть проект на GitHub Pages
+# TASK: Деплой на GitHub Pages
+
+## Статус проекта
+
+- Git: ✅ инициализирован
+- Коммит: `ac60af2` — init
+- Remote: нужно подключить
 
 ## Цель
 
-Инициализировать git-репозиторий, связать с GitHub и задеплоить сайт на GitHub Pages.
-
-## Репозиторий
-
-**URL:** https://github.com/Mdyuzhev/lab-ecosystem
+Подключить remote репозиторий и запушить для автодеплоя на GitHub Pages.
 
 ## Шаги
 
-### Шаг 1 — Инициализация git
+### Шаг 1 — Удалить лишний файл
 
 ```bash
-cd /e/Politech/lab-ecosystem
-git init
+rm .claude/settings.local.json
 ```
 
-### Шаг 2 — Создать .gitignore
-
-Создать файл `.gitignore` с содержимым:
-
-```
-node_modules/
-dist/
-.DS_Store
-*.log
-.env
-.env.local
-```
-
-### Шаг 3 — Первый коммит
+### Шаг 2 — Подключить remote
 
 ```bash
-git add -A
-git commit -m "feat: initial commit - lab ecosystem site"
-```
-
-### Шаг 4 — Связать с GitHub
-
-```bash
-git branch -M main
 git remote add origin https://github.com/Mdyuzhev/lab-ecosystem.git
 ```
 
-### Шаг 5 — Пуш
+Если remote уже есть:
+```bash
+git remote set-url origin https://github.com/Mdyuzhev/lab-ecosystem.git
+```
+
+### Шаг 3 — Пуш в GitHub
 
 ```bash
 git push -u origin main
 ```
 
-### Шаг 6 — Проверить деплой
+### Шаг 4 — Проверить GitHub Actions
 
-После пуша GitHub Actions автоматически запустится (файл `.github/workflows/deploy.yml` уже есть).
-
-Проверить статус:
+После пуша автоматически запустится workflow. Проверить:
 - https://github.com/Mdyuzhev/lab-ecosystem/actions
 
-После успешного деплоя сайт будет доступен:
-- https://mdyuzhev.github.io/lab-ecosystem/
+Ждать пока статус станет зелёным (✅).
 
-## Если нужна авторизация GitHub
+### Шаг 5 — Включить GitHub Pages (если не включён)
 
-При пуше может запросить логин/пароль. Варианты:
-
-1. **GitHub CLI** (рекомендуется):
-   ```bash
-   gh auth login
-   ```
-
-2. **Personal Access Token:**
-   - GitHub → Settings → Developer settings → Personal access tokens
-   - Создать токен с правами `repo`
-   - Использовать токен вместо пароля
-
-3. **SSH ключ:**
-   ```bash
-   git remote set-url origin git@github.com:Mdyuzhev/lab-ecosystem.git
-   ```
+Если сайт не появился после успешного workflow:
+1. GitHub → репозиторий → Settings → Pages
+2. Source: **GitHub Actions**
+3. Save
 
 ## Результат
 
-После выполнения:
-- Код в репозитории: https://github.com/Mdyuzhev/lab-ecosystem
-- Сайт онлайн: https://mdyuzhev.github.io/lab-ecosystem/
+Сайт доступен: https://mdyuzhev.github.io/lab-ecosystem/
 
-## Следующие шаги
+## После деплоя
 
-После успешного деплоя:
-1. Проверить что сайт открывается
-2. Проверить интерактивность (клики на карточки)
-3. Если есть проблемы — смотреть консоль браузера (F12)
+Закоммитить удаление settings.local.json:
+```bash
+git add -A
+git commit -m "chore: remove settings.local.json"
+git push
+```
 
 ---
 
-*Задача создана: Январь 2025*
+*Работать автономно, не спрашивать подтверждений*
