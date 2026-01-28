@@ -1,6 +1,7 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { Target, Lightbulb, Rocket, Users, Brain, Ruler, Wrench, CheckCircle } from 'lucide-react'
+import { Target, Lightbulb, Rocket, Users } from 'lucide-react'
+import aiFactoryImg from '../pic/KQyV_HVR31gHY0Pbvx0x7.png'
 
 export default function About() {
   const ref = useRef(null)
@@ -112,44 +113,14 @@ export default function About() {
               </div>
             </div>
             
-            {/* Visual diagram */}
+            {/* AI Factory illustration */}
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 rounded-2xl blur-xl" />
-              <div className="relative glass rounded-2xl p-6">
-                <div className="text-center mb-6">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 mb-3">
-                    <Brain className="w-8 h-8 text-white" />
-                  </div>
-                  <div className="font-semibold">Claude / GPT-4</div>
-                  <div className="text-sm text-slate-400">Создаёт инструменты</div>
-                </div>
-                
-                <div className="flex justify-center mb-4">
-                  <div className="text-emerald-400 text-2xl">↓</div>
-                </div>
-                
-                <div className="grid grid-cols-3 gap-3">
-                  {[
-                    { icon: Ruler, label: 'Расчёты' },
-                    { icon: Wrench, label: 'Генераторы' },
-                    { icon: CheckCircle, label: 'Валидаторы' }
-                  ].map((item, i) => (
-                    <div key={i} className="bg-slate-800 rounded-lg p-3 text-center text-sm">
-                      <item.icon className="w-5 h-5 mx-auto mb-1 text-emerald-400" />
-                      <div className="text-slate-400 text-xs">{item.label}</div>
-                    </div>
-                  ))}
-                </div>
-                
-                <div className="flex justify-center my-4">
-                  <div className="text-amber-400 text-2xl">↓</div>
-                </div>
-                
-                <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-3 text-center">
-                  <div className="text-amber-400 font-semibold">∞ Использований</div>
-                  <div className="text-sm text-slate-400">Быстро, бесплатно, без ошибок</div>
-                </div>
-              </div>
+              <div className="absolute inset-0 bg-emerald-500/20 blur-3xl rounded-full" />
+              <img
+                src={aiFactoryImg}
+                alt="ИИ как фабрика инструментов — Claude/GPT создаёт модули для бесконечного использования"
+                className="relative w-full rounded-2xl"
+              />
             </div>
           </div>
         </motion.div>
