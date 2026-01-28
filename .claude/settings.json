@@ -1,0 +1,45 @@
+{
+  "model": "sonnet",
+  "permissions": {
+    "allow": [
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(node:*)",
+      "Bash(git:*)",
+      "Bash(grep:*)",
+      "Bash(find:*)",
+      "Bash(cat:*)",
+      "Bash(ls:*)",
+      "Bash(echo:*)",
+      "Bash(rm:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(mv:*)",
+      "Bash(du:*)",
+      "Read",
+      "Write",
+      "Edit",
+      "Glob",
+      "Grep"
+    ],
+    "deny": [
+      "Bash(rm -rf /)",
+      "Bash(sudo:*)"
+    ]
+  },
+  "context": {
+    "project": "Lab Ecosystem",
+    "type": "react-site",
+    "language": "javascript",
+    "framework": "react",
+    "styling": "tailwind",
+    "bundler": "vite",
+    "deploy": "github-pages"
+  },
+  "codeStyle": {
+    "indentSize": 2,
+    "useSemicolons": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  }
+}
