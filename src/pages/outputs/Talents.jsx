@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowLeft, GraduationCap, Users, Briefcase, Award, UserCheck, ArrowDown } from 'lucide-react'
+import { ArrowLeft, GraduationCap, Users, Briefcase, Award, ArrowDown } from 'lucide-react'
+import OutputsNavigation from '../../components/OutputsNavigation'
 
 export default function Talents() {
   const program = [
@@ -123,24 +124,15 @@ export default function Talents() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-2xl font-bold mb-4">Все лаборатории участвуют</h2>
-          <p className="text-slate-400 mb-8">
-            Студенты распределяются по всем трём лабораториям в зависимости от интересов и компетенций.
+      {/* Навигация по выходам */}
+      <OutputsNavigation currentId="talents" />
+
+      {/* Источник */}
+      <section className="py-8 border-t border-slate-800">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <p className="text-sm text-slate-500">
+            Подготовка кадров во всех лабораториях экосистемы
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link to="/labs/ai" className="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 transition-colors">
-              ИИ-лаборатория
-            </Link>
-            <Link to="/labs/software" className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 transition-colors">
-              Лаборатория ПО
-            </Link>
-            <Link to="/labs/robotics" className="px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 transition-colors">
-              Робототехника
-            </Link>
-          </div>
         </div>
       </section>
     </div>

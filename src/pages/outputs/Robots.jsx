@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { ArrowLeft, Bot, Server, Eye, Package, Users, ArrowRight } from 'lucide-react'
+import OutputsNavigation from '../../components/OutputsNavigation'
 
 export default function Robots() {
   const directions = [
@@ -115,16 +116,18 @@ export default function Robots() {
         </div>
       </section>
 
-      {/* Связь с лабораторией */}
-      <section className="py-16">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-2xl font-bold mb-4">Источник</h2>
-          <p className="text-slate-400 mb-8">
-            Роботы разрабатываются Лабораторией Робототехники с использованием ИИ-модулей и ПО-компонентов из других лабораторий.
+      {/* Навигация по выходам */}
+      <OutputsNavigation currentId="robots" />
+
+      {/* Источник */}
+      <section className="py-8 border-t border-slate-800">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <p className="text-sm text-slate-500">
+            Создаётся в{' '}
+            <Link to="/labs/robotics" className="text-purple-400 hover:underline">
+              Лаборатории Робототехники
+            </Link>
           </p>
-          <Link to="/labs/robotics" className="px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 transition-colors inline-block">
-            Лаборатория Робототехники
-          </Link>
         </div>
       </section>
     </div>

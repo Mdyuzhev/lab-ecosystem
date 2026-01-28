@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { ArrowLeft, FileText, Shield, BookOpen, Lock, Scale, Check } from 'lucide-react'
+import OutputsNavigation from '../../components/OutputsNavigation'
 
 export default function IP() {
   const ipTypes = [
@@ -119,24 +120,15 @@ export default function IP() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-2xl font-bold mb-4">Все лаборатории генерируют IP</h2>
-          <p className="text-slate-400 mb-8">
-            Каждая лаборатория вносит вклад в портфель интеллектуальной собственности экосистемы.
+      {/* Навигация по выходам */}
+      <OutputsNavigation currentId="ip" />
+
+      {/* Источник */}
+      <section className="py-8 border-t border-slate-800">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <p className="text-sm text-slate-500">
+            IP создаётся во всех лабораториях экосистемы
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link to="/labs/ai" className="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 transition-colors">
-              ИИ-лаборатория
-            </Link>
-            <Link to="/labs/software" className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 transition-colors">
-              Лаборатория ПО
-            </Link>
-            <Link to="/labs/robotics" className="px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 transition-colors">
-              Робототехника
-            </Link>
-          </div>
         </div>
       </section>
     </div>

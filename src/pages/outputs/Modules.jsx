@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { ArrowLeft, Wrench, Code, FileJson, Cog, Zap, Check, Lock, Unlock } from 'lucide-react'
+import OutputsNavigation from '../../components/OutputsNavigation'
 
 export default function Modules() {
   const moduleTypes = [
@@ -133,16 +134,18 @@ export default function Modules() {
         </div>
       </section>
 
-      {/* Связь с лабораторией */}
-      <section className="py-16">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-2xl font-bold mb-4">Источник</h2>
-          <p className="text-slate-400 mb-8">
-            Модули создаются Лабораторией ИИ и используются во всех продуктовых командах экосистемы.
+      {/* Навигация по выходам */}
+      <OutputsNavigation currentId="modules" />
+
+      {/* Источник */}
+      <section className="py-8 border-t border-slate-800">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <p className="text-sm text-slate-500">
+            Создаётся в{' '}
+            <Link to="/labs/ai" className="text-emerald-400 hover:underline">
+              Лаборатории ИИ
+            </Link>
           </p>
-          <Link to="/labs/ai" className="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 transition-colors inline-block">
-            Лаборатория ИИ
-          </Link>
         </div>
       </section>
     </div>

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { ArrowLeft, Briefcase, Cog, Cloud, Plug, BarChart3, ArrowRight } from 'lucide-react'
+import OutputsNavigation from '../../components/OutputsNavigation'
 
 export default function Software() {
   const productTypes = [
@@ -113,16 +114,18 @@ export default function Software() {
         </div>
       </section>
 
-      {/* Связь с лабораторией */}
-      <section className="py-16">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-2xl font-bold mb-4">Источник</h2>
-          <p className="text-slate-400 mb-8">
-            Программные продукты создаются Лабораторией ПО с использованием модулей ИИ-лаборатории.
+      {/* Навигация по выходам */}
+      <OutputsNavigation currentId="software" />
+
+      {/* Источник */}
+      <section className="py-8 border-t border-slate-800">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <p className="text-sm text-slate-500">
+            Создаётся в{' '}
+            <Link to="/labs/software" className="text-blue-400 hover:underline">
+              Лаборатории ПО
+            </Link>
           </p>
-          <Link to="/labs/software" className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 transition-colors inline-block">
-            Лаборатория ПО
-          </Link>
         </div>
       </section>
     </div>
