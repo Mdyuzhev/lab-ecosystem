@@ -1,54 +1,26 @@
-import { useState, useEffect } from 'react';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import SmoothScroll from './components/SmoothScroll';
-import Hero from './pages/Hero';
-import About from './pages/About';
-import Labs from './pages/Labs';
-import Ecosystem from './pages/Ecosystem';
-import Economics from './pages/Economics';
-import Roadmap from './pages/Roadmap';
-import Team from './pages/Team';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Footer from './components/Footer'
+import ScrollToTop from './components/ScrollToTop'
+import Home from './pages/Home'
+import AILab from './pages/labs/AILab'
+import SoftwareLab from './pages/labs/SoftwareLab'
+import RoboticsLab from './pages/labs/RoboticsLab'
 
 function App() {
-  const [activeSection, setActiveSection] = useState('hero');
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['hero', 'about', 'labs', 'ecosystem', 'economics', 'roadmap', 'team'];
-      const scrollPosition = window.scrollY + 200;
-
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
-    <SmoothScroll>
+    <BrowserRouter basename="/lab-ecosystem">
+      <ScrollToTop />
       <div className="min-h-screen bg-slate-900 text-white">
-        <Navbar activeSection={activeSection} />
-        <Hero />
-        <About />
-        <Labs />
-        <Ecosystem />
-        <Economics />
-        <Roadmap />
-        <Team />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/labs/ai" element={<AILab />} />
+          <Route path="/labs/software" element={<SoftwareLab />} />
+          <Route path="/labs/robotics" element={<RoboticsLab />} />
+        </Routes>
         <Footer />
       </div>
-    </SmoothScroll>
-  );
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App

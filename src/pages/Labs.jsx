@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import { motion, useInView } from 'framer-motion'
 import { Cpu, Code, Bot, FlaskConical, Atom, ArrowRight, DollarSign, Plug } from 'lucide-react'
 
@@ -140,12 +141,6 @@ export default function Labs() {
               {/* Description */}
               <p className="text-sm text-slate-400 mb-4">{lab.description}</p>
 
-              {/* Expand hint */}
-              <div className={`flex items-center gap-1 text-sm ${colorClasses[lab.color].text}`}>
-                <span>Подробнее</span>
-                <ArrowRight size={14} className={`transition-transform ${activeLab === lab.id ? 'rotate-90' : ''}`} />
-              </div>
-
               {/* Expanded content */}
               {activeLab === lab.id && (
                 <motion.div
@@ -164,18 +159,32 @@ export default function Labs() {
                       ))}
                     </div>
                   </div>
-                  <div>
+                  <div className="mb-4">
                     <div className="text-sm font-semibold mb-2 text-yellow-400 flex items-center gap-1">
-                                      <DollarSign className="w-4 h-4" /> Монетизация:
-                                    </div>
+                      <DollarSign className="w-4 h-4" /> Монетизация:
+                    </div>
                     <ul className="text-sm text-slate-400 space-y-1">
                       {lab.money.map((item, j) => (
                         <li key={j}>• {item}</li>
                       ))}
                     </ul>
                   </div>
+                  <Link
+                    to={`/labs/${lab.id}`}
+                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg ${colorClasses[lab.color].bg} ${colorClasses[lab.color].text} hover:opacity-80 transition-opacity`}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <span>Открыть страницу</span>
+                    <ArrowRight size={14} />
+                  </Link>
                 </motion.div>
               )}
+
+              {/* Expand hint */}
+              <div className={`flex items-center gap-1 text-sm ${colorClasses[lab.color].text} ${activeLab === lab.id ? 'hidden' : ''}`}>
+                <span>Подробнее</span>
+                <ArrowRight size={14} />
+              </div>
             </motion.div>
           ))}
         </div>
