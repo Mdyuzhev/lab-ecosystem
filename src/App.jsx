@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import AILab from './pages/labs/AILab'
 import SoftwareLab from './pages/labs/SoftwareLab'
 import RoboticsLab from './pages/labs/RoboticsLab'
+import RoboticsCaseVKR from './pages/labs/cases/RoboticsCaseVKR'
 import Modules from './pages/outputs/Modules'
 import Robots from './pages/outputs/Robots'
 import Software from './pages/outputs/Software'
@@ -21,6 +22,7 @@ function App() {
           <Route path="/labs/ai" element={<AILab />} />
           <Route path="/labs/software" element={<SoftwareLab />} />
           <Route path="/labs/robotics" element={<RoboticsLab />} />
+          <Route path="/labs/robotics/case-vkr" element={<RoboticsCaseVKR />} />
           <Route path="/outputs/modules" element={<Modules />} />
           <Route path="/outputs/robots" element={<Robots />} />
           <Route path="/outputs/software" element={<Software />} />

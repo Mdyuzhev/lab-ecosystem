@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowLeft, Bot, Eye, Cpu, Cog, Box, Gamepad2, Target, Wrench } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Bot, Eye, Cpu, Cog, Box, Gamepad2, Target, Wrench, FileText } from 'lucide-react'
 
 export default function RoboticsLab() {
   return (
@@ -161,6 +161,28 @@ export default function RoboticsLab() {
                 <div className="text-sm text-slate-400">{item.desc}</div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Кейс ВКР */}
+      <section className="py-16 bg-slate-900/50">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="glass rounded-2xl p-8 border border-purple-500/20">
+            <div className="flex items-center gap-4 mb-4">
+              <FileText className="text-purple-400" size={24} />
+              <h2 className="text-xl font-bold">Реальный пример применения</h2>
+            </div>
+            <p className="text-slate-400 mb-4">
+              Смотрите, как ИИ-инструменты могли бы ускорить разработку боевого робота
+              в 5-10 раз на примере реальной ВКР студента Политеха.
+            </p>
+            <Link
+              to="/labs/robotics/case-vkr"
+              className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
+            >
+              Смотреть кейс <ArrowRight size={16} />
+            </Link>
           </div>
         </div>
       </section>
