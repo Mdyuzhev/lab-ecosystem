@@ -3,7 +3,16 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
   Calculator, Cpu, Zap, Box, Ruler, Layers,
-  Lightbulb, ArrowRight, ArrowLeft, Eye
+  Lightbulb, ArrowRight, ArrowLeft, Eye,
+  // Иконки для типов элементов
+  CornerDownRight,
+  GripHorizontal,
+  RectangleHorizontal,
+  GripVertical,
+  // Иконки для результатов
+  CheckCircle,
+  AlertTriangle,
+  XCircle,
 } from 'lucide-react'
 
 // Предустановленные материалы
@@ -17,10 +26,10 @@ const MATERIALS = [
 
 // Типы элементов
 const ELEMENT_TYPES = [
-  { id: 'beam-cantilever', label: 'Консольная балка', icon: '📐' },
-  { id: 'beam-supported', label: 'Балка на опорах', icon: '🔩' },
-  { id: 'plate', label: 'Пластина', icon: '▬' },
-  { id: 'rod', label: 'Стержень', icon: '│' },
+  { id: 'beam-cantilever', label: 'Консольная балка', Icon: CornerDownRight, color: 'emerald' },
+  { id: 'beam-supported', label: 'Балка на опорах', Icon: GripHorizontal, color: 'blue' },
+  { id: 'plate', label: 'Пластина', Icon: RectangleHorizontal, color: 'purple' },
+  { id: 'rod', label: 'Стержень', Icon: GripVertical, color: 'amber' },
 ]
 
 // Компонент поля ввода
@@ -149,9 +158,17 @@ function StressVisualization({ results, inputs, isAnimating }) {
         )}
 
         {/* Индикатор результата */}
-        {results && (
-          <div className="absolute top-4 right-4 text-3xl">
-            {results.zoneIcon}
+        {results && results.ZoneIcon && (
+          <div className={`absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center ${
+            results.zoneColor === 'emerald' ? 'bg-emerald-500/20' :
+            results.zoneColor === 'amber' ? 'bg-amber-500/20' :
+            'bg-red-500/20'
+          }`}>
+            <results.ZoneIcon className={`${
+              results.zoneColor === 'emerald' ? 'text-emerald-400' :
+              results.zoneColor === 'amber' ? 'text-amber-400' :
+              'text-red-400'
+            }`} size={24} />
           </div>
         )}
       </div>
@@ -310,19 +327,19 @@ export default function ImpactCalculator() {
     const safety_ultimate = sigma_v / sigma_dynamic
 
     // Определение зоны
-    let zone, zoneColor, zoneIcon
+    let zone, zoneColor, ZoneIcon
     if (sigma_dynamic < sigma_t) {
       zone = 'УПРУГАЯ ДЕФОРМАЦИЯ'
       zoneColor = 'emerald'
-      zoneIcon = '✅'
+      ZoneIcon = CheckCircle
     } else if (sigma_dynamic < sigma_v) {
       zone = 'ПЛАСТИЧЕСКАЯ ДЕФОРМАЦИЯ'
       zoneColor = 'amber'
-      zoneIcon = '⚠️'
+      ZoneIcon = AlertTriangle
     } else {
       zone = 'РАЗРУШЕНИЕ'
       zoneColor = 'red'
-      zoneIcon = '❌'
+      ZoneIcon = XCircle
     }
 
     setResults({
@@ -341,7 +358,7 @@ export default function ImpactCalculator() {
       safetyUltimate: safety_ultimate,
       zone,
       zoneColor,
-      zoneIcon,
+      ZoneIcon,
     })
   }
 
@@ -391,20 +408,32 @@ export default function ImpactCalculator() {
             </h3>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {ELEMENT_TYPES.map(type => (
-                <button
-                  key={type.id}
-                  onClick={() => updateInput('elementType', type.id)}
-                  className={`p-4 rounded-lg border transition-all ${
-                    inputs.elementType === type.id
-                      ? 'border-emerald-500 bg-emerald-500/10'
-                      : 'border-slate-700 hover:border-slate-600'
-                  }`}
-                >
-                  <div className="text-2xl mb-2">{type.icon}</div>
-                  <div className="text-sm">{type.label}</div>
-                </button>
-              ))}
+              {ELEMENT_TYPES.map(type => {
+                const colorClasses = {
+                  emerald: { border: 'border-emerald-500', bg: 'bg-emerald-500/10', iconBg: 'bg-emerald-500/20', iconText: 'text-emerald-400' },
+                  blue: { border: 'border-blue-500', bg: 'bg-blue-500/10', iconBg: 'bg-blue-500/20', iconText: 'text-blue-400' },
+                  purple: { border: 'border-purple-500', bg: 'bg-purple-500/10', iconBg: 'bg-purple-500/20', iconText: 'text-purple-400' },
+                  amber: { border: 'border-amber-500', bg: 'bg-amber-500/10', iconBg: 'bg-amber-500/20', iconText: 'text-amber-400' },
+                }
+                const colors = colorClasses[type.color]
+                const isSelected = inputs.elementType === type.id
+                return (
+                  <button
+                    key={type.id}
+                    onClick={() => updateInput('elementType', type.id)}
+                    className={`p-4 rounded-lg border transition-all ${
+                      isSelected
+                        ? `${colors.border} ${colors.bg}`
+                        : 'border-slate-700 hover:border-slate-600'
+                    }`}
+                  >
+                    <div className={`w-10 h-10 mx-auto mb-2 rounded-lg ${colors.iconBg} flex items-center justify-center`}>
+                      <type.Icon className={colors.iconText} size={24} />
+                    </div>
+                    <div className="text-sm">{type.label}</div>
+                  </button>
+                )
+              })}
             </div>
           </div>
 
@@ -603,7 +632,17 @@ export default function ImpactCalculator() {
                 'border-red-500/50 bg-red-500/10'
               }`}>
                 <div className="text-center">
-                  <div className="text-6xl mb-4">{results.zoneIcon}</div>
+                  <div className={`w-20 h-20 mx-auto mb-4 rounded-full flex items-center justify-center ${
+                    results.zoneColor === 'emerald' ? 'bg-emerald-500/20' :
+                    results.zoneColor === 'amber' ? 'bg-amber-500/20' :
+                    'bg-red-500/20'
+                  }`}>
+                    <results.ZoneIcon className={`${
+                      results.zoneColor === 'emerald' ? 'text-emerald-400' :
+                      results.zoneColor === 'amber' ? 'text-amber-400' :
+                      'text-red-400'
+                    }`} size={48} />
+                  </div>
                   <div className={`text-3xl font-bold mb-2 ${
                     results.zoneColor === 'emerald' ? 'text-emerald-400' :
                     results.zoneColor === 'amber' ? 'text-amber-400' :
