@@ -1,10 +1,36 @@
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls, ContactShadows } from '@react-three/drei'
 import * as THREE from 'three'
 import { useMemo, useRef, useState, useEffect } from 'react'
 import { Eye } from 'lucide-react'
 
-// --- Вспомогательные функции ---
+// --- Утилиты ---
+
+function getSectionDimensions(inputs) {
+  const scale = 0.01
+  if (inputs.sectionType === 'rectangular') {
+    return {
+      width: inputs.width * scale,
+      height: inputs.height * scale,
+      halfHeight: inputs.height * scale / 2,
+      maxDim: Math.max(inputs.width, inputs.height) * scale,
+    }
+  } else if (inputs.sectionType === 'circular') {
+    return {
+      width: inputs.diameter * scale,
+      height: inputs.diameter * scale,
+      halfHeight: inputs.diameter * scale / 2,
+      maxDim: inputs.diameter * scale,
+    }
+  } else {
+    return {
+      width: inputs.outerDiameter * scale,
+      height: inputs.outerDiameter * scale,
+      halfHeight: inputs.outerDiameter * scale / 2,
+      maxDim: inputs.outerDiameter * scale,
+    }
+  }
+}
 
 function createSectionShape(sectionType, inputs) {
   const shape = new THREE.Shape()
@@ -104,7 +130,6 @@ function applyDeflection(geometry, results, inputs, factor) {
   }
   const lengthRange = maxZ - minZ || 1
 
-  // Сохраняем оригинальные позиции при первом вызове
   if (!geometry.userData.originalY) {
     geometry.userData.originalY = new Float32Array(count)
     for (let i = 0; i < count; i++) {
@@ -124,6 +149,36 @@ function applyDeflection(geometry, results, inputs, factor) {
 }
 
 // --- 3D компоненты ---
+
+function CameraController({ inputs }) {
+  const { camera } = useThree()
+  const beamLength = inputs.length * 0.01
+  const sec = getSectionDimensions(inputs)
+
+  useEffect(() => {
+    const dist = Math.max(beamLength * 0.8, sec.maxDim * 3, 2)
+    camera.position.set(dist * 0.6, dist * 0.4, dist * 0.6)
+    camera.lookAt(0, 0, 0)
+    camera.updateProjectionMatrix()
+  }, [inputs.length, inputs.sectionType, inputs.width, inputs.height,
+      inputs.diameter, inputs.outerDiameter, camera, beamLength, sec.maxDim])
+
+  return null
+}
+
+function SceneSetup({ inputs }) {
+  const beamLength = inputs.length * 0.01
+  const sec = getSectionDimensions(inputs)
+  const gridSize = Math.max(beamLength * 2, sec.maxDim * 4, 4)
+  const floorY = -(sec.halfHeight + 0.4)
+
+  return (
+    <>
+      <gridHelper args={[gridSize, 20, '#1e293b', '#1e293b']} position={[0, floorY, 0]} />
+      <ContactShadows position={[0, floorY, 0]} opacity={0.3} scale={gridSize} blur={2} />
+    </>
+  )
+}
 
 function BeamMesh({ results, inputs, isAnimating }) {
   const meshRef = useRef()
@@ -153,7 +208,6 @@ function BeamMesh({ results, inputs, isAnimating }) {
   }, [inputs.sectionType, inputs.length, inputs.width, inputs.height,
       inputs.diameter, inputs.outerDiameter, inputs.innerDiameter, results])
 
-  // Сбрасываем анимацию при новом результате
   useEffect(() => {
     if (results && results !== prevResults.current) {
       deflectionFactor.current = 0
@@ -161,7 +215,6 @@ function BeamMesh({ results, inputs, isAnimating }) {
     }
   }, [results])
 
-  // Анимация прогиба
   useFrame((_, delta) => {
     if (!results || !baseGeometry) return
 
@@ -196,43 +249,38 @@ function Support({ inputs }) {
   const isSupported = inputs.elementType === 'beam-supported'
   const beamLength = inputs.length * 0.01
   const halfLength = beamLength / 2
+  const sec = getSectionDimensions(inputs)
 
-  // Определяем размер сечения для масштабирования опоры
-  let sectionSize = 0.3
-  if (inputs.sectionType === 'rectangular') {
-    sectionSize = Math.max(inputs.width, inputs.height) * 0.01
-  } else if (inputs.sectionType === 'circular') {
-    sectionSize = inputs.diameter * 0.01
-  } else if (inputs.sectionType === 'tube') {
-    sectionSize = inputs.outerDiameter * 0.01
-  }
-  const supportHeight = Math.max(sectionSize * 2.5, 1.2)
+  const supportHeight = Math.max(sec.maxDim * 2.5, 1.2)
+  const wallThickness = 0.15
+  const wallWidth = sec.maxDim * 1.4
 
   if (isCantilever || inputs.elementType === 'plate' || inputs.elementType === 'rod') {
     return (
-      <mesh position={[-0.15, 0, -halfLength]}>
-        <boxGeometry args={[0.3, supportHeight, 0.15]} />
+      <mesh position={[-wallThickness / 2, 0, -halfLength]}>
+        <boxGeometry args={[wallThickness, supportHeight, Math.max(wallWidth, 0.3)]} />
         <meshStandardMaterial color="#334155" metalness={0.2} roughness={0.8} />
       </mesh>
     )
   }
 
   if (isSupported) {
+    const triScale = Math.max(sec.maxDim * 0.7, 0.2)
     const triShape = new THREE.Shape()
     triShape.moveTo(0, 0)
-    triShape.lineTo(0.15, -0.25)
-    triShape.lineTo(-0.15, -0.25)
+    triShape.lineTo(triScale, -triScale * 1.5)
+    triShape.lineTo(-triScale, -triScale * 1.5)
     triShape.closePath()
 
-    const triGeo = new THREE.ExtrudeGeometry(triShape, { depth: 0.15, bevelEnabled: false })
-    triGeo.translate(0, 0, -0.075)
+    const triGeo = new THREE.ExtrudeGeometry(triShape, { depth: triScale, bevelEnabled: false })
+    triGeo.translate(0, 0, -triScale / 2)
 
     return (
       <group>
-        <mesh position={[0, -sectionSize / 2, -halfLength]} geometry={triGeo}>
+        <mesh position={[0, -sec.halfHeight, -halfLength]} geometry={triGeo}>
           <meshStandardMaterial color="#475569" />
         </mesh>
-        <mesh position={[0, -sectionSize / 2, halfLength]} geometry={triGeo}>
+        <mesh position={[0, -sec.halfHeight, halfLength]} geometry={triGeo}>
           <meshStandardMaterial color="#475569" />
         </mesh>
       </group>
@@ -247,13 +295,18 @@ function Impactor({ results, inputs, isAnimating }) {
   const beamLength = inputs.length * 0.01
   const halfLength = beamLength / 2
   const isCantilever = inputs.elementType === 'beam-cantilever'
+  const sec = getSectionDimensions(inputs)
 
   const impactZ = isCantilever || inputs.elementType === 'plate' || inputs.elementType === 'rod'
     ? halfLength : 0
 
-  const baseY = 0.8
-  const targetY = 0.3
+  const targetY = sec.halfHeight + 0.15
+  const baseY = sec.halfHeight + 0.8
   const posY = useRef(baseY)
+
+  useEffect(() => {
+    posY.current = baseY
+  }, [baseY])
 
   useFrame((_, delta) => {
     if (!ref.current) return
@@ -284,6 +337,7 @@ function ImpactParticles({ results, inputs, isAnimating }) {
   const beamLength = inputs.length * 0.01
   const halfLength = beamLength / 2
   const isCantilever = inputs.elementType === 'beam-cantilever'
+  const sec = getSectionDimensions(inputs)
   const impactZ = isCantilever || inputs.elementType === 'plate' || inputs.elementType === 'rod'
     ? halfLength : 0
 
@@ -298,7 +352,7 @@ function ImpactParticles({ results, inputs, isAnimating }) {
             1.5 + Math.random() * 2,
             Math.sin(angle) * (1.5 + Math.random())
           ),
-          position: new THREE.Vector3(0, 0.3, impactZ),
+          position: new THREE.Vector3(0, sec.halfHeight + 0.15, impactZ),
           life: 1.0,
         }
       })
@@ -307,7 +361,7 @@ function ImpactParticles({ results, inputs, isAnimating }) {
       initialized.current = false
       particles.current = []
     }
-  }, [isAnimating, impactZ])
+  }, [isAnimating, impactZ, sec.halfHeight])
 
   useFrame((_, delta) => {
     if (!groupRef.current) return
@@ -343,6 +397,7 @@ function ImpactParticles({ results, inputs, isAnimating }) {
 
 export default function BeamVisualization3DCanvas({ results, inputs, isAnimating }) {
   const zoneColor = results?.zoneColor || 'emerald'
+  const beamLength = inputs.length * 0.01
 
   const sectionName = inputs.sectionType === 'rectangular' ? 'Прямоугольное'
     : inputs.sectionType === 'circular' ? 'Круглое' : 'Трубное'
@@ -372,24 +427,24 @@ export default function BeamVisualization3DCanvas({ results, inputs, isAnimating
           <directionalLight position={[5, 5, 5]} intensity={0.8} />
           <directionalLight position={[-3, 2, -3]} intensity={0.3} />
 
+          <CameraController inputs={inputs} />
+
           <OrbitControls
             enablePan={true}
             enableZoom={true}
             enableRotate={true}
-            minDistance={1.5}
-            maxDistance={10}
+            minDistance={Math.max(beamLength * 0.3, 1)}
+            maxDistance={Math.max(beamLength * 3, 10)}
             autoRotate={!results}
             autoRotateSpeed={0.5}
           />
 
-          <ContactShadows position={[0, -0.8, 0]} opacity={0.3} scale={8} blur={2} />
+          <SceneSetup inputs={inputs} />
 
           <BeamMesh results={results} inputs={inputs} isAnimating={isAnimating} />
           <Support inputs={inputs} />
           <Impactor results={results} inputs={inputs} isAnimating={isAnimating} />
           <ImpactParticles results={results} inputs={inputs} isAnimating={isAnimating} />
-
-          <gridHelper args={[10, 20, '#1e293b', '#1e293b']} position={[0, -0.8, 0]} />
         </Canvas>
 
         {results && (
