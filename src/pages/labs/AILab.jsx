@@ -146,7 +146,7 @@ export default function AILab() {
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-2xl font-bold mb-6">Попробуйте прототипы инструментов</h2>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-3 gap-6">
             <div className="glass rounded-2xl p-8 border border-emerald-500/20">
               <div className="flex items-center gap-4 mb-4">
                 <Calculator className="text-emerald-400" size={24} />
@@ -175,6 +175,21 @@ export default function AILab() {
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 transition-colors"
               >
                 Открыть сверку <ArrowRight size={16} />
+              </Link>
+            </div>
+            <div className="glass rounded-2xl p-8 border border-amber-500/20">
+              <div className="flex items-center gap-4 mb-4">
+                <Database className="text-amber-400" size={24} />
+                <h3 className="text-lg font-bold">EXPLAIN Visualizer</h3>
+              </div>
+              <p className="text-slate-400 mb-4">
+                Визуализация планов PostgreSQL-запросов с анализом bottleneck.
+              </p>
+              <Link
+                to="/tools/explain-visualizer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-600 hover:bg-amber-500 transition-colors"
+              >
+                Открыть визуализатор <ArrowRight size={16} />
               </Link>
             </div>
           </div>

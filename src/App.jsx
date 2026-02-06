@@ -8,6 +8,7 @@ import RoboticsLab from './pages/labs/RoboticsLab'
 import RoboticsCaseVKR from './pages/labs/cases/RoboticsCaseVKR'
 import ImpactCalculator from './pages/tools/ImpactCalculator'
 import DataReconciliation from './pages/tools/DataReconciliation'
+import ExplainVisualizer from './pages/tools/ExplainVisualizer'
 import Modules from './pages/outputs/Modules'
 import Robots from './pages/outputs/Robots'
 import Software from './pages/outputs/Software'
@@ -32,6 +33,7 @@ function App() {
           <Route path="/outputs/ip" element={<IP />} />
           <Route path="/tools/impact-calculator" element={<ImpactCalculator />} />
           <Route path="/tools/data-reconciliation" element={<DataReconciliation />} />
+          <Route path="/tools/explain-visualizer" element={<ExplainVisualizer />} />
         </Routes>
         <Footer />
       </div>
