@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowLeft, ArrowRight, Code, Globe, Database, Plug, TestTube, Server, Target, Rocket, FileSearch, Brain, Workflow } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Code, Globe, Database, Plug, TestTube, Server, Target, Rocket, FileSearch, Brain, Workflow, Layers } from 'lucide-react'
 
 export default function SoftwareLab() {
   return (
@@ -204,6 +204,34 @@ export default function SoftwareLab() {
                 <span className="text-xs px-2 py-1 rounded bg-emerald-500/10 text-emerald-300">K8s</span>
               </div>
               <div className="flex items-center gap-1 text-emerald-400 text-sm group-hover:gap-2 transition-all">
+                <span>Подробнее</span>
+                <ArrowRight size={14} />
+              </div>
+            </Link>
+
+            <Link
+              to="/labs/software/product-dev"
+              className="glass rounded-xl p-6 hover:border-cyan-500/30 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-lg bg-cyan-500/20 flex items-center justify-center">
+                  <Layers className="text-cyan-400" size={20} />
+                </div>
+                <div>
+                  <div className="text-xs text-cyan-400 font-medium">Гипотезы &rarr; Эксперименты</div>
+                  <h3 className="font-semibold">Развитие продуктов</h3>
+                </div>
+              </div>
+              <p className="text-sm text-slate-400 mb-4">
+                Реестр из 40+ гипотез по улучшению Wink, Видеонаблюдения, Умного дома и Ключа с помощью AI и аналитики.
+              </p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                <span className="text-xs px-2 py-1 rounded bg-cyan-500/10 text-cyan-300">Wink</span>
+                <span className="text-xs px-2 py-1 rounded bg-cyan-500/10 text-cyan-300">CV</span>
+                <span className="text-xs px-2 py-1 rounded bg-cyan-500/10 text-cyan-300">IoT</span>
+                <span className="text-xs px-2 py-1 rounded bg-cyan-500/10 text-cyan-300">AI</span>
+              </div>
+              <div className="flex items-center gap-1 text-cyan-400 text-sm group-hover:gap-2 transition-all">
                 <span>Подробнее</span>
                 <ArrowRight size={14} />
               </div>
