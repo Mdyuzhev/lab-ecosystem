@@ -192,6 +192,21 @@ export default function AILab() {
                 Открыть визуализатор <ArrowRight size={16} />
               </Link>
             </div>
+            <div className="glass rounded-2xl p-8 border border-purple-500/20">
+              <div className="flex items-center gap-4 mb-4">
+                <Database className="text-purple-400" size={24} />
+                <h3 className="text-lg font-bold">ERD Builder</h3>
+              </div>
+              <p className="text-slate-400 mb-4">
+                Интерактивная ERD-диаграмма из DDL-скриптов с анализом проблем.
+              </p>
+              <Link
+                to="/tools/erd-builder"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 transition-colors"
+              >
+                Открыть ERD Builder <ArrowRight size={16} />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
