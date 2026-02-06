@@ -6,6 +6,7 @@ import AILab from './pages/labs/AILab'
 import SoftwareLab from './pages/labs/SoftwareLab'
 import RoboticsLab from './pages/labs/RoboticsLab'
 import RoboticsCaseVKR from './pages/labs/cases/RoboticsCaseVKR'
+import ImpactCalculator from './pages/tools/ImpactCalculator'
 import Modules from './pages/outputs/Modules'
 import Robots from './pages/outputs/Robots'
 import Software from './pages/outputs/Software'
@@ -28,6 +29,7 @@ function App() {
           <Route path="/outputs/software" element={<Software />} />
           <Route path="/outputs/talents" element={<Talents />} />
           <Route path="/outputs/ip" element={<IP />} />
+          <Route path="/tools/impact-calculator" element={<ImpactCalculator />} />
         </Routes>
         <Footer />
       </div>

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowLeft, Cpu, Sparkles, Code, BookOpen, Lightbulb, Target, Users, Zap } from 'lucide-react'
+import { ArrowLeft, Cpu, Sparkles, Code, BookOpen, Lightbulb, Target, Users, Zap, Calculator, ArrowRight } from 'lucide-react'
 
 export default function AILab() {
   return (
@@ -138,6 +138,28 @@ export default function AILab() {
                 <div className="text-sm text-slate-400">{item.desc}</div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Прототип инструмента */}
+      <section className="py-16">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="glass rounded-2xl p-8 border border-emerald-500/20">
+            <div className="flex items-center gap-4 mb-4">
+              <Calculator className="text-emerald-400" size={24} />
+              <h2 className="text-xl font-bold">Попробуйте прототип инструмента</h2>
+            </div>
+            <p className="text-slate-400 mb-4">
+              Калькулятор ударных нагрузок — пример детерминированного инструмента,
+              который работает мгновенно, без ИИ, без ошибок.
+            </p>
+            <Link
+              to="/tools/impact-calculator"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 transition-colors"
+            >
+              Открыть калькулятор <ArrowRight size={16} />
+            </Link>
           </div>
         </div>
       </section>
