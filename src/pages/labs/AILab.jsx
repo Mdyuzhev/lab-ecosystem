@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowLeft, Cpu, Sparkles, Code, BookOpen, Lightbulb, Target, Users, Zap, Calculator, ArrowRight } from 'lucide-react'
+import { ArrowLeft, Cpu, Sparkles, Code, BookOpen, Lightbulb, Target, Users, Zap, Calculator, ArrowRight, Database } from 'lucide-react'
 
 export default function AILab() {
   return (
@@ -142,24 +142,41 @@ export default function AILab() {
         </div>
       </section>
 
-      {/* Прототип инструмента */}
+      {/* Прототипы инструментов */}
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="glass rounded-2xl p-8 border border-emerald-500/20">
-            <div className="flex items-center gap-4 mb-4">
-              <Calculator className="text-emerald-400" size={24} />
-              <h2 className="text-xl font-bold">Попробуйте прототип инструмента</h2>
+          <h2 className="text-2xl font-bold mb-6">Попробуйте прототипы инструментов</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="glass rounded-2xl p-8 border border-emerald-500/20">
+              <div className="flex items-center gap-4 mb-4">
+                <Calculator className="text-emerald-400" size={24} />
+                <h3 className="text-lg font-bold">Калькулятор ударных нагрузок</h3>
+              </div>
+              <p className="text-slate-400 mb-4">
+                Детерминированный инструмент — работает мгновенно, без ИИ, без ошибок.
+              </p>
+              <Link
+                to="/tools/impact-calculator"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 transition-colors"
+              >
+                Открыть калькулятор <ArrowRight size={16} />
+              </Link>
             </div>
-            <p className="text-slate-400 mb-4">
-              Калькулятор ударных нагрузок — пример детерминированного инструмента,
-              который работает мгновенно, без ИИ, без ошибок.
-            </p>
-            <Link
-              to="/tools/impact-calculator"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 transition-colors"
-            >
-              Открыть калькулятор <ArrowRight size={16} />
-            </Link>
+            <div className="glass rounded-2xl p-8 border border-blue-500/20">
+              <div className="flex items-center gap-4 mb-4">
+                <Database className="text-blue-400" size={24} />
+                <h3 className="text-lg font-bold">Сверка данных</h3>
+              </div>
+              <p className="text-slate-400 mb-4">
+                Загрузите два CSV — получите отчёт с расхождениями. Всё в браузере.
+              </p>
+              <Link
+                to="/tools/data-reconciliation"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 transition-colors"
+              >
+                Открыть сверку <ArrowRight size={16} />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
