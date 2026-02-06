@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
   Calculator, Cpu, Zap, Box, Ruler, Layers,
-  Lightbulb, ArrowRight, ArrowLeft
+  Lightbulb, ArrowRight, ArrowLeft, Eye
 } from 'lucide-react'
 
 // Предустановленные материалы
@@ -65,6 +65,111 @@ function ResultCard({ label, value, unit, color }) {
   )
 }
 
+// Компонент визуализации напряжений
+function StressVisualization({ results, inputs, isAnimating }) {
+  const maxDeflection = results?.dynamicDeflection || 0
+  const deflectionScale = Math.min(maxDeflection / 5, 15) // Масштаб для визуализации
+
+  return (
+    <div className="glass rounded-2xl p-6 mb-6 overflow-hidden">
+      <h3 className="font-semibold mb-4 flex items-center gap-2">
+        <Eye className="text-purple-400" size={20} />
+        Визуализация нагружения
+      </h3>
+
+      <div className="relative h-48 bg-slate-950 rounded-xl overflow-hidden">
+        {/* Фоновая сетка */}
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'linear-gradient(#1e293b 1px, transparent 1px), linear-gradient(90deg, #1e293b 1px, transparent 1px)',
+          backgroundSize: '20px 20px'
+        }}/>
+
+        {/* Заделка */}
+        <div className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-24 rounded-r-sm"
+             style={{ background: 'repeating-linear-gradient(45deg, #334155, #334155 4px, #475569 4px, #475569 8px)' }}/>
+
+        {/* Балка */}
+        <div
+          className={`absolute left-12 top-1/2 h-5 rounded-r transition-all duration-500 ${isAnimating ? 'animate-pulse' : ''}`}
+          style={{
+            width: '75%',
+            transform: results
+              ? `translateY(-50%) perspective(500px) rotateX(${deflectionScale}deg)`
+              : 'translateY(-50%)',
+            transformOrigin: 'left center',
+            background: results
+              ? `linear-gradient(90deg,
+                  ${results.zoneColor === 'emerald' ? '#10b981' : results.zoneColor === 'amber' ? '#f59e0b' : '#ef4444'} 0%,
+                  ${results.zoneColor === 'emerald' ? '#34d399' : results.zoneColor === 'amber' ? '#fbbf24' : '#f87171'} 100%)`
+              : 'linear-gradient(90deg, #10b981, #34d399)',
+            boxShadow: results
+              ? `0 ${Math.min(maxDeflection, 20)}px ${Math.min(maxDeflection * 2, 40)}px -10px ${
+                  results.zoneColor === 'emerald' ? 'rgba(16, 185, 129, 0.5)' :
+                  results.zoneColor === 'amber' ? 'rgba(245, 158, 11, 0.5)' :
+                  'rgba(239, 68, 68, 0.5)'
+                }`
+              : '0 4px 20px -10px rgba(16, 185, 129, 0.5)'
+          }}
+        />
+
+        {/* Ударник */}
+        <div
+          className={`absolute right-16 transition-all duration-300 ${isAnimating ? 'top-1/3' : results ? 'top-1/4' : 'top-8'}`}
+          style={{ transform: 'translateX(50%)' }}
+        >
+          <div className="w-12 h-10 bg-slate-600 rounded flex items-center justify-center text-xs text-white font-bold shadow-lg">
+            {inputs.impactType === 'energy' ? `${inputs.impactEnergy}J` : `${inputs.impactMass}kg`}
+          </div>
+          <div className="w-0.5 h-6 bg-amber-500 mx-auto"/>
+          <div className="w-0 h-0 border-l-[6px] border-r-[6px] border-t-[10px] border-transparent border-t-amber-500 mx-auto"/>
+        </div>
+
+        {/* Индикатор прогиба */}
+        {results && (
+          <div className="absolute bottom-4 right-4 glass rounded-lg px-3 py-1">
+            <span className="text-xs text-slate-400">Прогиб: </span>
+            <span className={`text-sm font-bold ${
+              results.zoneColor === 'emerald' ? 'text-emerald-400' :
+              results.zoneColor === 'amber' ? 'text-amber-400' :
+              'text-red-400'
+            }`}>
+              {results.dynamicDeflection.toFixed(1)} мм
+            </span>
+          </div>
+        )}
+
+        {/* Градиентная шкала напряжений */}
+        {results && (
+          <div className="absolute bottom-4 left-4 flex items-center gap-2">
+            <div className="w-24 h-3 rounded" style={{
+              background: 'linear-gradient(90deg, #10b981, #f59e0b, #ef4444)'
+            }}/>
+            <span className="text-xs text-slate-500">σ</span>
+          </div>
+        )}
+
+        {/* Индикатор результата */}
+        {results && (
+          <div className="absolute top-4 right-4 text-3xl">
+            {results.zoneIcon}
+          </div>
+        )}
+      </div>
+
+      {/* Подписи */}
+      <div className="flex justify-between items-center mt-3 text-xs text-slate-500">
+        <span className="flex items-center gap-1">
+          <div className="w-2 h-2 bg-slate-600 rounded-sm"/> Заделка
+        </span>
+        <span>Консольная балка • L = {inputs.length} мм</span>
+        <span className="flex items-center gap-1">
+          <div className="w-2 h-2 bg-amber-500 rounded-full"/> Удар
+        </span>
+      </div>
+    </div>
+  )
+}
+
 export default function ImpactCalculator() {
   const [inputs, setInputs] = useState({
     // Тип элемента
@@ -95,6 +200,16 @@ export default function ImpactCalculator() {
   })
 
   const [results, setResults] = useState(null)
+  const [isAnimating, setIsAnimating] = useState(false)
+
+  // Анимация при расчёте
+  useEffect(() => {
+    if (results) {
+      setIsAnimating(true)
+      const timer = setTimeout(() => setIsAnimating(false), 800)
+      return () => clearTimeout(timer)
+    }
+  }, [results])
 
   // Выбор материала
   const selectMaterial = (mat) => {
@@ -468,6 +583,11 @@ export default function ImpactCalculator() {
             <Calculator size={20} />
             Рассчитать
           </button>
+
+          {/* Визуализация */}
+          <div className="mt-8">
+            <StressVisualization results={results} inputs={inputs} isAnimating={isAnimating} />
+          </div>
 
           {/* Результаты */}
           {results && (
