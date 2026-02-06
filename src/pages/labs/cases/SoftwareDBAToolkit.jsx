@@ -4,7 +4,8 @@ import {
   ArrowLeft, ArrowRight, Database, Search, GitBranch,
   Brain, Shield, Zap, Clock, Users, Target, Rocket,
   CheckCircle, ChevronRight, Code, AlertTriangle, Layers,
-  Lock, Puzzle, TrendingUp, Network, Lightbulb, Eye
+  Lock, Puzzle, TrendingUp, Network, Lightbulb, Eye,
+  Plug, Palette, Bot, TestTube, Map, Monitor, FileText, Pencil, PenLine, Settings, BarChart3
 } from 'lucide-react'
 
 const fadeIn = {
@@ -96,11 +97,11 @@ const phases = [
 ]
 
 const team = [
-  { role: 'Query Engine', focus: 'EXPLAIN + Performance', icon: '\u26A1', desc: '\u041f\u0430\u0440\u0441\u0438\u043d\u0433 EXPLAIN (JSON + text), \u0434\u0435\u0440\u0435\u0432\u043e, \u043c\u0435\u0442\u0440\u0438\u043a\u0438, \u0441\u0440\u0430\u0432\u043d\u0435\u043d\u0438\u0435 \u043f\u043b\u0430\u043d\u043e\u0432, slow log', tech: 'JS, SVG, \u0430\u043b\u0433\u043e\u0440\u0438\u0442\u043c\u044b', color: 'amber' },
-  { role: 'Schema Engine', focus: 'ERD + Diff', icon: '\uD83D\uDDFA', desc: 'DDL-\u043f\u0430\u0440\u0441\u0435\u0440, \u0430\u0432\u0442\u043e\u043b\u044d\u0439\u0430\u0443\u0442 \u0433\u0440\u0430\u0444\u0430, Schema Diff, \u0433\u0435\u043d\u0435\u0440\u0430\u0446\u0438\u044f \u043c\u0438\u0433\u0440\u0430\u0446\u0438\u0439', tech: 'JS, SVG, \u0433\u0440\u0430\u0444-\u0430\u043b\u0433\u043e\u0440\u0438\u0442\u043c\u044b', color: 'purple' },
-  { role: 'Frontend', focus: 'UI \u043f\u043b\u0430\u0442\u0444\u043e\u0440\u043c\u044b', icon: '\uD83C\uDFA8', desc: '\u0415\u0434\u0438\u043d\u044b\u0439 \u043a\u0430\u0440\u043a\u0430\u0441, \u0434\u0438\u0437\u0430\u0439\u043d-\u0441\u0438\u0441\u0442\u0435\u043c\u0430, \u0434\u0430\u0448\u0431\u043e\u0440\u0434\u044b, \u044d\u043a\u0441\u043f\u043e\u0440\u0442 \u0432 PNG/PDF', tech: 'React, Tailwind, Canvas', color: 'blue' },
-  { role: 'AI & Analytics', focus: 'AI-\u0441\u043e\u0432\u0435\u0442\u043d\u0438\u043a', icon: '\uD83E\uDD16', desc: '\u041f\u0440\u043e\u043c\u043f\u0442\u044b \u0434\u043b\u044f \u043e\u043f\u0442\u0438\u043c\u0438\u0437\u0430\u0446\u0438\u0438, \u0430\u0443\u0434\u0438\u0442\u0430, \u043e\u0431\u044a\u044f\u0441\u043d\u0435\u043d\u0438\u0439. \u0420\u0430\u0441\u0448\u0438\u0440\u0435\u043d\u0438\u0435 \u043f\u0440\u0430\u0432\u0438\u043b \u0430\u043d\u0430\u043b\u0438\u0437\u0430\u0442\u043e\u0440\u0430', tech: 'LLM API, \u043f\u0440\u043e\u043c\u043f\u0442-\u0438\u043d\u0436\u0435\u043d\u0435\u0440\u0438\u044f', color: 'emerald' },
-  { role: 'QA & Data', focus: '\u0422\u0435\u0441\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435', icon: '\uD83E\uDDEA', desc: '\u0422\u0435\u0441\u0442\u043e\u0432\u044b\u0435 DDL \u0438 \u043f\u043b\u0430\u043d\u044b, \u0431\u0435\u043d\u0447\u043c\u0430\u0440\u043a\u0438, \u043a\u0440\u043e\u0441\u0441\u0431\u0440\u0430\u0443\u0437\u0435\u0440\u043d\u043e\u0441\u0442\u044c, CI/CD, \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0430\u0446\u0438\u044f', tech: 'Jest, Playwright, Docker', color: 'cyan' },
+  { role: 'Query Engine', focus: 'EXPLAIN + Performance', icon: Zap, desc: '\u041f\u0430\u0440\u0441\u0438\u043d\u0433 EXPLAIN (JSON + text), \u0434\u0435\u0440\u0435\u0432\u043e, \u043c\u0435\u0442\u0440\u0438\u043a\u0438, \u0441\u0440\u0430\u0432\u043d\u0435\u043d\u0438\u0435 \u043f\u043b\u0430\u043d\u043e\u0432, slow log', tech: 'JS, SVG, \u0430\u043b\u0433\u043e\u0440\u0438\u0442\u043c\u044b', color: 'amber' },
+  { role: 'Schema Engine', focus: 'ERD + Diff', icon: Map, desc: 'DDL-\u043f\u0430\u0440\u0441\u0435\u0440, \u0430\u0432\u0442\u043e\u043b\u044d\u0439\u0430\u0443\u0442 \u0433\u0440\u0430\u0444\u0430, Schema Diff, \u0433\u0435\u043d\u0435\u0440\u0430\u0446\u0438\u044f \u043c\u0438\u0433\u0440\u0430\u0446\u0438\u0439', tech: 'JS, SVG, \u0433\u0440\u0430\u0444-\u0430\u043b\u0433\u043e\u0440\u0438\u0442\u043c\u044b', color: 'purple' },
+  { role: 'Frontend', focus: 'UI \u043f\u043b\u0430\u0442\u0444\u043e\u0440\u043c\u044b', icon: Palette, desc: '\u0415\u0434\u0438\u043d\u044b\u0439 \u043a\u0430\u0440\u043a\u0430\u0441, \u0434\u0438\u0437\u0430\u0439\u043d-\u0441\u0438\u0441\u0442\u0435\u043c\u0430, \u0434\u0430\u0448\u0431\u043e\u0440\u0434\u044b, \u044d\u043a\u0441\u043f\u043e\u0440\u0442 \u0432 PNG/PDF', tech: 'React, Tailwind, Canvas', color: 'blue' },
+  { role: 'AI & Analytics', focus: 'AI-\u0441\u043e\u0432\u0435\u0442\u043d\u0438\u043a', icon: Bot, desc: '\u041f\u0440\u043e\u043c\u043f\u0442\u044b \u0434\u043b\u044f \u043e\u043f\u0442\u0438\u043c\u0438\u0437\u0430\u0446\u0438\u0438, \u0430\u0443\u0434\u0438\u0442\u0430, \u043e\u0431\u044a\u044f\u0441\u043d\u0435\u043d\u0438\u0439. \u0420\u0430\u0441\u0448\u0438\u0440\u0435\u043d\u0438\u0435 \u043f\u0440\u0430\u0432\u0438\u043b \u0430\u043d\u0430\u043b\u0438\u0437\u0430\u0442\u043e\u0440\u0430', tech: 'LLM API, \u043f\u0440\u043e\u043c\u043f\u0442-\u0438\u043d\u0436\u0435\u043d\u0435\u0440\u0438\u044f', color: 'emerald' },
+  { role: 'QA & Data', focus: '\u0422\u0435\u0441\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435', icon: TestTube, desc: '\u0422\u0435\u0441\u0442\u043e\u0432\u044b\u0435 DDL \u0438 \u043f\u043b\u0430\u043d\u044b, \u0431\u0435\u043d\u0447\u043c\u0430\u0440\u043a\u0438, \u043a\u0440\u043e\u0441\u0441\u0431\u0440\u0430\u0443\u0437\u0435\u0440\u043d\u043e\u0441\u0442\u044c, CI/CD, \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0430\u0446\u0438\u044f', tech: 'Jest, Playwright, Docker', color: 'cyan' },
 ]
 
 export default function SoftwareDBAToolkit() {
@@ -186,11 +187,11 @@ export default function SoftwareDBAToolkit() {
 
               <div className="space-y-4">
                 {[
-                  { icon: '\uD83D\uDCC4', pain: 'Текстовый EXPLAIN', desc: 'Дерево из 50 строк, вложенность 8 уровней, bottleneck не виден' },
-                  { icon: '\uD83D\uDDA5', pain: 'Тяжёлые IDE', desc: 'DBeaver/pgAdmin — установка, лицензии, нет мобильного доступа' },
-                  { icon: '\uD83C\uDF10', pain: 'Онлайн-инструменты', desc: 'Данные уходят на чужие серверы — неприемлемо для продакшн-схем' },
-                  { icon: '\u270F\uFE0F', pain: 'Ручные ERD', desc: 'Рисуют связи в draw.io руками, забывают обновить после ALTER TABLE' },
-                  { icon: '\uD83D\uDD0D', pain: 'Слепые зоны', desc: 'FK без индексов, таблицы-сироты, циклические зависимости — не видны без анализа' },
+                  { icon: FileText, pain: 'Текстовый EXPLAIN', desc: 'Дерево из 50 строк, вложенность 8 уровней, bottleneck не виден' },
+                  { icon: Monitor, pain: 'Тяжёлые IDE', desc: 'DBeaver/pgAdmin — установка, лицензии, нет мобильного доступа' },
+                  { icon: Globe, pain: 'Онлайн-инструменты', desc: 'Данные уходят на чужие серверы — неприемлемо для продакшн-схем' },
+                  { icon: Pencil, pain: 'Ручные ERD', desc: 'Рисуют связи в draw.io руками, забывают обновить после ALTER TABLE' },
+                  { icon: Search, pain: 'Слепые зоны', desc: 'FK без индексов, таблицы-сироты, циклические зависимости — не видны без анализа' },
                 ].map((item, i) => (
                   <motion.div
                     key={i}
@@ -200,7 +201,9 @@ export default function SoftwareDBAToolkit() {
                     transition={{ delay: i * 0.1 }}
                     className="glass rounded-xl p-4 flex items-start gap-4"
                   >
-                    <span className="text-2xl flex-shrink-0">{item.icon}</span>
+                    <div className="w-10 h-10 rounded-lg bg-amber-500/20 flex items-center justify-center flex-shrink-0">
+                      <item.icon className="text-amber-400" size={20} />
+                    </div>
                     <div>
                       <div className="font-medium text-white">{item.pain}</div>
                       <div className="text-sm text-slate-400">{item.desc}</div>
@@ -357,14 +360,14 @@ export default function SoftwareDBAToolkit() {
                 <div className="text-xs text-slate-500 uppercase tracking-wider mb-3">Общие модули</div>
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                   {[
-                    { icon: '\uD83D\uDCDD', name: 'SQL Parser', desc: 'DDL, DML, EXPLAIN' },
-                    { icon: '\uD83C\uDFA8', name: 'SVG Renderer', desc: 'Деревья, графы, ERD' },
-                    { icon: '\u26A0\uFE0F', name: 'Analyzer', desc: '50+ правил проверки' },
-                    { icon: '\uD83E\uDD16', name: 'AI Advisor', desc: 'Рекомендации LLM' },
-                    { icon: '\uD83D\uDCCA', name: 'Exporter', desc: 'PNG, SVG, PDF, SQL' },
+                    { icon: PenLine, name: 'SQL Parser', desc: 'DDL, DML, EXPLAIN' },
+                    { icon: Palette, name: 'SVG Renderer', desc: 'Деревья, графы, ERD' },
+                    { icon: AlertTriangle, name: 'Analyzer', desc: '50+ правил проверки' },
+                    { icon: Bot, name: 'AI Advisor', desc: 'Рекомендации LLM' },
+                    { icon: BarChart3, name: 'Exporter', desc: 'PNG, SVG, PDF, SQL' },
                   ].map(item => (
                     <div key={item.name} className="rounded-lg bg-slate-800 p-3 text-center">
-                      <div className="text-lg mb-1">{item.icon}</div>
+                      <div className="mb-1"><item.icon className="text-amber-400 mx-auto" size={20} /></div>
                       <div className="text-xs font-medium">{item.name}</div>
                       <div className="text-xs text-slate-500">{item.desc}</div>
                     </div>
@@ -540,7 +543,7 @@ export default function SoftwareDBAToolkit() {
 
             <div className="grid md:grid-cols-3 gap-6">
               <div className="glass rounded-xl p-6 border border-emerald-500/20">
-                <h3 className="font-semibold mb-3 text-emerald-400">{'\uD83E\uDD16'} &laquo;Оптимизировать запрос&raquo;</h3>
+                <h3 className="font-semibold mb-3 text-emerald-400 flex items-center gap-2"><Bot size={18} /> &laquo;Оптимизировать запрос&raquo;</h3>
                 <div className="space-y-3 text-sm text-slate-300">
                   <p>DBA вставляет EXPLAIN ANALYZE медленного запроса.</p>
                   <p>AI получает дерево плана + предупреждения анализатора.</p>
@@ -553,7 +556,7 @@ export default function SoftwareDBAToolkit() {
               </div>
 
               <div className="glass rounded-xl p-6 border border-emerald-500/20">
-                <h3 className="font-semibold mb-3 text-emerald-400">{'\uD83E\uDD16'} &laquo;Аудит схемы&raquo;</h3>
+                <h3 className="font-semibold mb-3 text-emerald-400 flex items-center gap-2"><Bot size={18} /> &laquo;Аудит схемы&raquo;</h3>
                 <div className="space-y-3 text-sm text-slate-300">
                   <p>DBA загрузил DDL из pg_dump. Схема: 45 таблиц.</p>
                   <p>AI получает результат анализа: предупреждения, статистику.</p>
@@ -566,7 +569,7 @@ export default function SoftwareDBAToolkit() {
               </div>
 
               <div className="glass rounded-xl p-6 border border-emerald-500/20">
-                <h3 className="font-semibold mb-3 text-emerald-400">{'\uD83E\uDD16'} &laquo;Объяснить план&raquo;</h3>
+                <h3 className="font-semibold mb-3 text-emerald-400 flex items-center gap-2"><Bot size={18} /> &laquo;Объяснить план&raquo;</h3>
                 <div className="space-y-3 text-sm text-slate-300">
                   <p>Джуниор-разработчик не понимает почему запрос медленный.</p>
                   <p>AI объясняет план простым языком с аналогиями.</p>
@@ -667,7 +670,7 @@ export default function SoftwareDBAToolkit() {
             <div className="grid md:grid-cols-5 gap-4">
               {team.map((member, i) => (
                 <motion.div key={member.role} {...stagger(i)} className="glass rounded-xl p-4 text-center">
-                  <div className="text-2xl mb-2">{member.icon}</div>
+                  <div className="mb-3"><member.icon className={`${teamColors[member.color]} mx-auto`} size={24} /></div>
                   <div className="font-semibold text-sm mb-1">{member.role}</div>
                   <div className={`text-xs ${teamColors[member.color]} mb-2`}>{member.focus}</div>
                   <div className="text-xs text-slate-500 mb-2">{member.desc}</div>

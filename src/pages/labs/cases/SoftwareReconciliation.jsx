@@ -5,7 +5,7 @@ import {
   Puzzle, Brain, Shield, Zap, Clock, Users, Target, Rocket,
   CheckCircle, ChevronRight, Database, Code, Globe, Download,
   TrendingUp, DollarSign, AlertTriangle, Layers, GitBranch,
-  MonitorSmartphone, Lock, Plug
+  MonitorSmartphone, Lock, Plug, Palette, Bot, TestTube
 } from 'lucide-react'
 
 const fadeIn = {
@@ -594,14 +594,14 @@ export default function SoftwareReconciliation() {
 
             <div className="grid md:grid-cols-5 gap-4">
               {[
-                { role: 'Backend Core', focus: 'Движок сверки', tech: 'JS, алгоритмы', color: 'blue', icon: '\u2699\uFE0F', desc: 'Плагинная архитектура, нормализаторы, матчеры, pipeline' },
-                { role: 'Frontend', focus: 'UI конструктор', tech: 'React, Tailwind', color: 'purple', icon: '\uD83C\uDFA8', desc: 'Визуальный конструктор правил, дашборды, визуализация' },
-                { role: 'AI & Analytics', focus: 'AI-ассистент', tech: 'LLM API, промпты', color: 'emerald', icon: '\uD83E\uDD16', desc: 'Автонастройка, семантический матчинг, анализ аномалий' },
-                { role: 'Data & QA', focus: 'Тестирование', tech: 'Python, pytest', color: 'amber', icon: '\uD83E\uDDEA', desc: 'Генераторы данных, тесты, бенчмарки, CI/CD' },
-                { role: 'Integrations', focus: 'Форматы и шаблоны', tech: 'JS, parsers', color: 'cyan', icon: '\uD83D\uDD0C', desc: 'Загрузчики (Excel, JSON, SQL), шаблоны сверок, экспорт' },
+                { role: 'Backend Core', focus: 'Движок сверки', tech: 'JS, алгоритмы', color: 'blue', icon: Settings, desc: 'Плагинная архитектура, нормализаторы, матчеры, pipeline' },
+                { role: 'Frontend', focus: 'UI конструктор', tech: 'React, Tailwind', color: 'purple', icon: Palette, desc: 'Визуальный конструктор правил, дашборды, визуализация' },
+                { role: 'AI & Analytics', focus: 'AI-ассистент', tech: 'LLM API, промпты', color: 'emerald', icon: Bot, desc: 'Автонастройка, семантический матчинг, анализ аномалий' },
+                { role: 'Data & QA', focus: 'Тестирование', tech: 'Python, pytest', color: 'amber', icon: TestTube, desc: 'Генераторы данных, тесты, бенчмарки, CI/CD' },
+                { role: 'Integrations', focus: 'Форматы и шаблоны', tech: 'JS, parsers', color: 'cyan', icon: Plug, desc: 'Загрузчики (Excel, JSON, SQL), шаблоны сверок, экспорт' },
               ].map((member, i) => (
                 <motion.div key={member.role} {...stagger(i)} className="glass rounded-xl p-4 text-center">
-                  <div className="text-2xl mb-2">{member.icon}</div>
+                  <div className="mb-3"><member.icon className={`${teamColors[member.color]} mx-auto`} size={24} /></div>
                   <div className="font-semibold text-sm mb-1">{member.role}</div>
                   <div className={`text-xs ${teamColors[member.color]} mb-2`}>{member.focus}</div>
                   <div className="text-xs text-slate-500 mb-2">{member.desc}</div>

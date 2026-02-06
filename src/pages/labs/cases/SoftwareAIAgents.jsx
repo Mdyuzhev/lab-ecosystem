@@ -5,7 +5,8 @@ import {
   Shield, Zap, Users, Target, Rocket,
   CheckCircle, ChevronRight, AlertTriangle, Layers,
   Database, Network, TrendingUp, Eye, Server,
-  Workflow, BarChart3, Lightbulb, PlayCircle, TestTube
+  Workflow, BarChart3, Lightbulb, PlayCircle, TestTube,
+  Plug, ClipboardList, Monitor, Settings, Globe, Bot, RefreshCw, ShieldCheck, Clock, User2
 } from 'lucide-react'
 
 const fadeIn = {
@@ -99,11 +100,11 @@ const phases = [
 ]
 
 const team = [
-  { role: 'MCP & Infra', focus: '\u0421\u0442\u0435\u043d\u0434 + \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u044f', icon: '\uD83D\uDD0C', desc: 'MCP-\u0441\u0435\u0440\u0432\u0435\u0440, \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u0435 \u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u043e\u0432 (bash, git, psql, kubectl), \u043d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0430 \u0441\u0442\u0435\u043d\u0434\u0430', tech: 'MCP, Docker, K8s, Linux' },
-  { role: 'Agent Scripts', focus: '\u0418\u043d\u0441\u0442\u0440\u0443\u043a\u0446\u0438\u0438 \u0430\u0433\u0435\u043d\u0442\u0430', icon: '\uD83D\uDCCB', desc: '\u041d\u0430\u043f\u0438\u0441\u0430\u043d\u0438\u0435 .md-\u0438\u043d\u0441\u0442\u0440\u0443\u043a\u0446\u0438\u0439 \u0434\u043b\u044f \u043a\u0430\u0436\u0434\u043e\u0439 \u0437\u0430\u0434\u0430\u0447\u0438, \u043e\u0442\u043b\u0430\u0434\u043a\u0430, \u043e\u0431\u0440\u0430\u0431\u043e\u0442\u043a\u0430 edge cases', tech: 'Markdown, Shell, prompting' },
-  { role: 'Metrics & QA', focus: '\u0418\u0437\u043c\u0435\u0440\u0435\u043d\u0438\u044f', icon: '\uD83D\uDCCA', desc: '\u0424\u0440\u0435\u0439\u043c\u0432\u043e\u0440\u043a \u0434\u043e/\u043f\u043e\u0441\u043b\u0435, \u0441\u0431\u043e\u0440 \u043c\u0435\u0442\u0440\u0438\u043a, A/B-\u0441\u0440\u0430\u0432\u043d\u0435\u043d\u0438\u044f, \u043a\u043e\u043d\u0442\u0440\u043e\u043b\u044c \u043a\u0430\u0447\u0435\u0441\u0442\u0432\u0430 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u043e\u0432', tech: 'Python, Grafana, \u0441\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043a\u0430' },
-  { role: 'Platform UI', focus: '\u0414\u0430\u0448\u0431\u043e\u0440\u0434 + \u0443\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435', icon: '\uD83D\uDDA5', desc: '\u0412\u0435\u0431-\u0438\u043d\u0442\u0435\u0440\u0444\u0435\u0439\u0441: \u0437\u0430\u043f\u0443\u0441\u043a \u0437\u0430\u0434\u0430\u0447, \u043b\u043e\u0433\u0438, \u0440\u0430\u0441\u043f\u0438\u0441\u0430\u043d\u0438\u0435, \u043e\u0442\u0447\u0451\u0442\u044b \u043f\u043e \u044d\u043a\u043e\u043d\u043e\u043c\u0438\u0438', tech: 'React, Tailwind, REST API' },
-  { role: 'DevOps & CI', focus: '\u0418\u043d\u0442\u0435\u0433\u0440\u0430\u0446\u0438\u044f \u0432 \u043f\u0430\u0439\u043f\u043b\u0430\u0439\u043d', icon: '\u2699\uFE0F', desc: 'GitLab CI-\u0438\u043d\u0442\u0435\u0433\u0440\u0430\u0446\u0438\u044f, \u0442\u0440\u0438\u0433\u0433\u0435\u0440\u044b \u0430\u0433\u0435\u043d\u0442\u0430, \u043e\u0440\u043a\u0435\u0441\u0442\u0440\u0430\u0446\u0438\u044f \u0446\u0435\u043f\u043e\u0447\u0435\u043a, Telegram-\u0431\u043e\u0442', tech: 'GitLab CI, Python, Bash' },
+  { role: 'MCP & Infra', focus: '\u0421\u0442\u0435\u043d\u0434 + \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u044f', icon: Plug, desc: 'MCP-\u0441\u0435\u0440\u0432\u0435\u0440, \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u0435 \u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u043e\u0432 (bash, git, psql, kubectl), \u043d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0430 \u0441\u0442\u0435\u043d\u0434\u0430', tech: 'MCP, Docker, K8s, Linux' },
+  { role: 'Agent Scripts', focus: '\u0418\u043d\u0441\u0442\u0440\u0443\u043a\u0446\u0438\u0438 \u0430\u0433\u0435\u043d\u0442\u0430', icon: ClipboardList, desc: '\u041d\u0430\u043f\u0438\u0441\u0430\u043d\u0438\u0435 .md-\u0438\u043d\u0441\u0442\u0440\u0443\u043a\u0446\u0438\u0439 \u0434\u043b\u044f \u043a\u0430\u0436\u0434\u043e\u0439 \u0437\u0430\u0434\u0430\u0447\u0438, \u043e\u0442\u043b\u0430\u0434\u043a\u0430, \u043e\u0431\u0440\u0430\u0431\u043e\u0442\u043a\u0430 edge cases', tech: 'Markdown, Shell, prompting' },
+  { role: 'Metrics & QA', focus: '\u0418\u0437\u043c\u0435\u0440\u0435\u043d\u0438\u044f', icon: BarChart3, desc: '\u0424\u0440\u0435\u0439\u043c\u0432\u043e\u0440\u043a \u0434\u043e/\u043f\u043e\u0441\u043b\u0435, \u0441\u0431\u043e\u0440 \u043c\u0435\u0442\u0440\u0438\u043a, A/B-\u0441\u0440\u0430\u0432\u043d\u0435\u043d\u0438\u044f, \u043a\u043e\u043d\u0442\u0440\u043e\u043b\u044c \u043a\u0430\u0447\u0435\u0441\u0442\u0432\u0430 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u043e\u0432', tech: 'Python, Grafana, \u0441\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043a\u0430' },
+  { role: 'Platform UI', focus: '\u0414\u0430\u0448\u0431\u043e\u0440\u0434 + \u0443\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435', icon: Monitor, desc: '\u0412\u0435\u0431-\u0438\u043d\u0442\u0435\u0440\u0444\u0435\u0439\u0441: \u0437\u0430\u043f\u0443\u0441\u043a \u0437\u0430\u0434\u0430\u0447, \u043b\u043e\u0433\u0438, \u0440\u0430\u0441\u043f\u0438\u0441\u0430\u043d\u0438\u0435, \u043e\u0442\u0447\u0451\u0442\u044b \u043f\u043e \u044d\u043a\u043e\u043d\u043e\u043c\u0438\u0438', tech: 'React, Tailwind, REST API' },
+  { role: 'DevOps & CI', focus: '\u0418\u043d\u0442\u0435\u0433\u0440\u0430\u0446\u0438\u044f \u0432 \u043f\u0430\u0439\u043f\u043b\u0430\u0439\u043d', icon: Settings, desc: 'GitLab CI-\u0438\u043d\u0442\u0435\u0433\u0440\u0430\u0446\u0438\u044f, \u0442\u0440\u0438\u0433\u0433\u0435\u0440\u044b \u0430\u0433\u0435\u043d\u0442\u0430, \u043e\u0440\u043a\u0435\u0441\u0442\u0440\u0430\u0446\u0438\u044f \u0446\u0435\u043f\u043e\u0447\u0435\u043a, Telegram-\u0431\u043e\u0442', tech: 'GitLab CI, Python, Bash' },
 ]
 
 export default function SoftwareAIAgents() {
@@ -185,10 +186,10 @@ export default function SoftwareAIAgents() {
 
               <div className="space-y-4">
                 {[
-                  { icon: '\uD83E\uDDEA', area: 'Автотесты', pain: 'Ручной запуск, анализ flaky, генерация Page Object — часы рутины каждую неделю' },
-                  { icon: '\uD83D\uDDC4', area: 'Базы данных', pain: 'Проверка миграций, аудит схемы, мониторинг качества данных — раз в спринт забывают' },
-                  { icon: '\uD83C\uDF10', area: 'Инфраструктура', pain: 'SSL, health-check, K8s-аудит, chaos-тестирование — всё руками, всё по чеклисту' },
-                  { icon: '\uD83D\uDCCB', area: 'Процессы', pain: 'Code review, changelog, постмортем, документация API — отнимают время у инженерии' },
+                  { icon: TestTube, area: 'Автотесты', pain: 'Ручной запуск, анализ flaky, генерация Page Object — часы рутины каждую неделю' },
+                  { icon: Database, area: 'Базы данных', pain: 'Проверка миграций, аудит схемы, мониторинг качества данных — раз в спринт забывают' },
+                  { icon: Globe, area: 'Инфраструктура', pain: 'SSL, health-check, K8s-аудит, chaos-тестирование — всё руками, всё по чеклисту' },
+                  { icon: ClipboardList, area: 'Процессы', pain: 'Code review, changelog, постмортем, документация API — отнимают время у инженерии' },
                 ].map((item, i) => (
                   <motion.div
                     key={i}
@@ -198,7 +199,9 @@ export default function SoftwareAIAgents() {
                     transition={{ delay: i * 0.1 }}
                     className="glass rounded-xl p-4 flex items-start gap-4"
                   >
-                    <span className="text-2xl flex-shrink-0">{item.icon}</span>
+                    <div className="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
+                      <item.icon className="text-emerald-400" size={20} />
+                    </div>
                     <div>
                       <div className="font-medium text-white">{item.area}</div>
                       <div className="text-sm text-slate-400">{item.pain}</div>
@@ -229,7 +232,7 @@ export default function SoftwareAIAgents() {
               </h3>
               <div className="grid md:grid-cols-3 gap-6">
                 <div className="rounded-xl bg-slate-800 p-6 text-center">
-                  <div className="text-3xl mb-3">{'\uD83D\uDC68\u200D\uD83D\uDCBB'}</div>
+                  <div className="mb-3"><User2 className="text-emerald-400 mx-auto" size={28} /></div>
                   <div className="font-semibold mb-2">Продукт-овнер</div>
                   <p className="text-sm text-slate-400">
                     Человек. Ставит задачу, принимает решения, контролирует результат.
@@ -237,7 +240,7 @@ export default function SoftwareAIAgents() {
                   </p>
                 </div>
                 <div className="rounded-xl bg-slate-800 p-6 text-center">
-                  <div className="text-3xl mb-3">{'\uD83E\uDDE0'}</div>
+                  <div className="mb-3"><Brain className="text-emerald-400 mx-auto" size={28} /></div>
                   <div className="font-semibold mb-2">Стратег (Claude Opus)</div>
                   <p className="text-sm text-slate-400">
                     LLM для планирования. Декомпозирует задачу, пишет спецификации,
@@ -245,7 +248,7 @@ export default function SoftwareAIAgents() {
                   </p>
                 </div>
                 <div className="rounded-xl bg-slate-800 p-6 text-center">
-                  <div className="text-3xl mb-3">{'\u26A1'}</div>
+                  <div className="mb-3"><Zap className="text-emerald-400 mx-auto" size={28} /></div>
                   <div className="font-semibold mb-2">Исполнитель (Claude Code)</div>
                   <p className="text-sm text-slate-400">
                     AI-агент с доступом к терминалу, git, API. Выполняет инструкции
@@ -257,7 +260,7 @@ export default function SoftwareAIAgents() {
 
             <div className="grid md:grid-cols-2 gap-6">
               <div className="glass rounded-xl p-6">
-                <h3 className="font-semibold mb-4 text-emerald-400">{'\u2705'} Подтверждено на практике</h3>
+                <h3 className="font-semibold mb-4 text-emerald-400 flex items-center gap-2"><CheckCircle size={18} /> Подтверждено на практике</h3>
                 <div className="space-y-2">
                   {[
                     'Планирование Logistics Hub: 109 задач за 8 минут (экономия 230-800K\u20BD)',
@@ -276,7 +279,7 @@ export default function SoftwareAIAgents() {
               </div>
 
               <div className="glass rounded-xl p-6">
-                <h3 className="font-semibold mb-4 text-amber-400">{'\u26A0\uFE0F'} Обнаруженные ограничения</h3>
+                <h3 className="font-semibold mb-4 text-amber-400 flex items-center gap-2"><AlertTriangle size={18} /> Обнаруженные ограничения</h3>
                 <div className="space-y-2">
                   {[
                     'Когнитивная перегрузка: >2 агентов одновременно — потеря контекста',
@@ -337,16 +340,20 @@ export default function SoftwareAIAgents() {
                 </div>
                 <div className="space-y-2">
                   {[
-                    { task: 'UI-автотесты на Selenide', status: '\u2705' },
-                    { task: 'Генерация тест-кейсов из ТЗ/user story', status: '\uD83D\uDD1C' },
-                    { task: 'Автогенерация Page Object по скриншоту', status: '\uD83D\uDD1C' },
-                    { task: 'Автоматический анализ flaky-тестов', status: '\uD83D\uDD1C' },
-                    { task: 'Генерация тестовых данных по модели', status: '\uD83D\uDD1C' },
-                    { task: 'Мутационное тестирование', status: '\uD83D\uDCA1' },
-                    { task: 'Визуальное регрессионное тестирование', status: '\uD83D\uDCA1' },
+                    { task: 'UI-автотесты на Selenide', status: 'done' },
+                    { task: 'Генерация тест-кейсов из ТЗ/user story', status: 'planned' },
+                    { task: 'Автогенерация Page Object по скриншоту', status: 'planned' },
+                    { task: 'Автоматический анализ flaky-тестов', status: 'planned' },
+                    { task: 'Генерация тестовых данных по модели', status: 'planned' },
+                    { task: 'Мутационное тестирование', status: 'research' },
+                    { task: 'Визуальное регрессионное тестирование', status: 'research' },
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-2 text-sm text-slate-300">
-                      <span className="flex-shrink-0">{item.status}</span>
+                      <span className="flex-shrink-0">
+                        {item.status === 'done' && <CheckCircle className="text-emerald-400" size={14} />}
+                        {item.status === 'planned' && <Clock className="text-blue-400" size={14} />}
+                        {item.status === 'research' && <Lightbulb className="text-amber-400" size={14} />}
+                      </span>
                       <span>{item.task}</span>
                     </div>
                   ))}
@@ -361,15 +368,19 @@ export default function SoftwareAIAgents() {
                 </div>
                 <div className="space-y-2">
                   {[
-                    { task: 'Автопроверка Flyway-миграций перед деплоем', status: '\uD83D\uDD1C' },
-                    { task: 'Аудит схемы dev vs prod', status: '\uD83D\uDD1C' },
-                    { task: 'Мониторинг качества данных (NULL, FK, дубли)', status: '\uD83D\uDD1C' },
-                    { task: 'Генерация тестовых fixtures по схеме', status: '\uD83D\uDD1C' },
-                    { task: 'Анализ pg_stat_statements, рекомендации по индексам', status: '\uD83D\uDD1C' },
-                    { task: 'Авто-откат при деградации SQL после деплоя', status: '\uD83D\uDCA1' },
+                    { task: 'Автопроверка Flyway-миграций перед деплоем', status: 'planned' },
+                    { task: 'Аудит схемы dev vs prod', status: 'planned' },
+                    { task: 'Мониторинг качества данных (NULL, FK, дубли)', status: 'planned' },
+                    { task: 'Генерация тестовых fixtures по схеме', status: 'planned' },
+                    { task: 'Анализ pg_stat_statements, рекомендации по индексам', status: 'planned' },
+                    { task: 'Авто-откат при деградации SQL после деплоя', status: 'research' },
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-2 text-sm text-slate-300">
-                      <span className="flex-shrink-0">{item.status}</span>
+                      <span className="flex-shrink-0">
+                        {item.status === 'done' && <CheckCircle className="text-emerald-400" size={14} />}
+                        {item.status === 'planned' && <Clock className="text-blue-400" size={14} />}
+                        {item.status === 'research' && <Lightbulb className="text-amber-400" size={14} />}
+                      </span>
                       <span>{item.task}</span>
                     </div>
                   ))}
@@ -384,15 +395,19 @@ export default function SoftwareAIAgents() {
                 </div>
                 <div className="space-y-2">
                   {[
-                    { task: 'Проверка доступности перед деплоем (DNS, порты, сервисы)', status: '\uD83D\uDD1C' },
-                    { task: 'Мониторинг SSL-сертификатов + автоперевыпуск', status: '\uD83D\uDD1C' },
-                    { task: 'Аудит K8s: лимиты, health checks, secrets', status: '\uD83D\uDD1C' },
-                    { task: 'Smoke-test после деплоя \u2192 Telegram', status: '\uD83D\uDD1C' },
-                    { task: 'Right-sizing: анализ CPU/RAM, рекомендации', status: '\uD83D\uDD1C' },
-                    { task: 'Chaos-тестирование: убить pod, проверить восстановление', status: '\uD83D\uDCA1' },
+                    { task: 'Проверка доступности перед деплоем (DNS, порты, сервисы)', status: 'planned' },
+                    { task: 'Мониторинг SSL-сертификатов + автоперевыпуск', status: 'planned' },
+                    { task: 'Аудит K8s: лимиты, health checks, secrets', status: 'planned' },
+                    { task: 'Smoke-test после деплоя \u2192 Telegram', status: 'planned' },
+                    { task: 'Right-sizing: анализ CPU/RAM, рекомендации', status: 'planned' },
+                    { task: 'Chaos-тестирование: убить pod, проверить восстановление', status: 'research' },
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-2 text-sm text-slate-300">
-                      <span className="flex-shrink-0">{item.status}</span>
+                      <span className="flex-shrink-0">
+                        {item.status === 'done' && <CheckCircle className="text-emerald-400" size={14} />}
+                        {item.status === 'planned' && <Clock className="text-blue-400" size={14} />}
+                        {item.status === 'research' && <Lightbulb className="text-amber-400" size={14} />}
+                      </span>
                       <span>{item.task}</span>
                     </div>
                   ))}
@@ -407,16 +422,20 @@ export default function SoftwareAIAgents() {
                 </div>
                 <div className="space-y-2">
                   {[
-                    { task: 'Автоматический code review в MR', status: '\uD83D\uDD1C' },
-                    { task: 'Генерация changelog по коммитам', status: '\uD83D\uDD1C' },
-                    { task: 'Анализ техдолга: TODO, CVE, мёртвый код', status: '\uD83D\uDD1C' },
-                    { task: 'Проверка Swagger-аннотаций, полнота API-документации', status: '\uD83D\uDD1C' },
-                    { task: 'Прогнозирование сроков по velocity', status: '\uD83D\uDCA1' },
-                    { task: 'Агент-онбординг: чат-бот по архитектуре проекта', status: '\uD83D\uDCA1' },
-                    { task: 'Автоматический постмортем: логи + метрики \u2192 отчёт', status: '\uD83D\uDCA1' },
+                    { task: 'Автоматический code review в MR', status: 'planned' },
+                    { task: 'Генерация changelog по коммитам', status: 'planned' },
+                    { task: 'Анализ техдолга: TODO, CVE, мёртвый код', status: 'planned' },
+                    { task: 'Проверка Swagger-аннотаций, полнота API-документации', status: 'planned' },
+                    { task: 'Прогнозирование сроков по velocity', status: 'research' },
+                    { task: 'Агент-онбординг: чат-бот по архитектуре проекта', status: 'research' },
+                    { task: 'Автоматический постмортем: логи + метрики \u2192 отчёт', status: 'research' },
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-2 text-sm text-slate-300">
-                      <span className="flex-shrink-0">{item.status}</span>
+                      <span className="flex-shrink-0">
+                        {item.status === 'done' && <CheckCircle className="text-emerald-400" size={14} />}
+                        {item.status === 'planned' && <Clock className="text-blue-400" size={14} />}
+                        {item.status === 'research' && <Lightbulb className="text-amber-400" size={14} />}
+                      </span>
                       <span>{item.task}</span>
                     </div>
                   ))}
@@ -425,9 +444,9 @@ export default function SoftwareAIAgents() {
             </div>
 
             <div className="flex gap-6 mt-6 text-sm text-slate-500">
-              <span>{'\u2705'} Реализовано</span>
-              <span>{'\uD83D\uDD1C'} В плане</span>
-              <span>{'\uD83D\uDCA1'} Исследование</span>
+              <span className="flex items-center gap-1"><CheckCircle className="text-emerald-400" size={12} /> Реализовано</span>
+              <span className="flex items-center gap-1"><Clock className="text-blue-400" size={12} /> В плане</span>
+              <span className="flex items-center gap-1"><Lightbulb className="text-amber-400" size={12} /> Исследование</span>
             </div>
           </motion.div>
         </div>
@@ -448,12 +467,12 @@ export default function SoftwareAIAgents() {
             <div className="glass rounded-2xl p-8 mb-8">
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                 {[
-                  { step: '1', title: 'Триггер', desc: 'GitLab CI вызывает агента после deploy-prod', icon: '\uD83D\uDE80' },
-                  { step: '2', title: 'Инструкция', desc: 'Агент читает .md-файл с шагами проверки', icon: '\uD83D\uDCCB' },
-                  { step: '3', title: 'Health Check', desc: 'curl API endpoint, проверка HTTP 200 + response time', icon: '\uD83D\uDC9A' },
-                  { step: '4', title: 'CRUD Test', desc: 'Создать/прочитать/обновить/удалить через API', icon: '\uD83D\uDD04' },
-                  { step: '5', title: 'Connections', desc: 'Проверить PostgreSQL, Kafka, Redis подключения', icon: '\uD83D\uDD0C' },
-                  { step: '6', title: 'Отчёт', desc: '\u2705 или \u274C + детали \u2192 Telegram + YouTrack', icon: '\uD83D\uDCCA' },
+                  { step: '1', title: 'Триггер', desc: 'GitLab CI вызывает агента после deploy-prod', icon: Rocket },
+                  { step: '2', title: 'Инструкция', desc: 'Агент читает .md-файл с шагами проверки', icon: ClipboardList },
+                  { step: '3', title: 'Health Check', desc: 'curl API endpoint, проверка HTTP 200 + response time', icon: ShieldCheck },
+                  { step: '4', title: 'CRUD Test', desc: 'Создать/прочитать/обновить/удалить через API', icon: RefreshCw },
+                  { step: '5', title: 'Connections', desc: 'Проверить PostgreSQL, Kafka, Redis подключения', icon: Plug },
+                  { step: '6', title: 'Отчёт', desc: 'Результат + детали \u2192 Telegram + YouTrack', icon: BarChart3 },
                 ].map((item, i) => (
                   <motion.div
                     key={i}
@@ -463,7 +482,7 @@ export default function SoftwareAIAgents() {
                     transition={{ delay: i * 0.1 }}
                     className="text-center"
                   >
-                    <div className="text-2xl mb-2">{item.icon}</div>
+                    <div className="mb-2"><item.icon className="text-emerald-400 mx-auto" size={22} /></div>
                     <div className="text-sm font-medium text-white">{item.title}</div>
                     <div className="text-xs text-slate-500 mt-1">{item.desc}</div>
                   </motion.div>
@@ -645,7 +664,7 @@ export default function SoftwareAIAgents() {
                   {...stagger(i)}
                   className="glass rounded-xl p-4 text-center"
                 >
-                  <div className="text-2xl mb-2">{member.icon}</div>
+                  <div className="mb-3"><member.icon className="text-emerald-400 mx-auto" size={24} /></div>
                   <div className="font-semibold text-sm mb-1">{member.role}</div>
                   <div className="text-xs text-emerald-400 mb-2">{member.focus}</div>
                   <p className="text-xs text-slate-400 mb-3">{member.desc}</p>
