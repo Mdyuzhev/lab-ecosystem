@@ -234,9 +234,9 @@ function BeamMesh({ results, inputs, isAnimating }) {
       })
     }
     return new THREE.MeshStandardMaterial({
-      color: '#475569',
-      metalness: 0.4,
-      roughness: 0.5,
+      color: '#94a3b8',
+      metalness: 0.3,
+      roughness: 0.4,
       side: THREE.DoubleSide,
     })
   }, [results])
@@ -421,11 +421,12 @@ export default function BeamVisualization3DCanvas({ results, inputs, isAnimating
         <Canvas
           camera={{ position: [3, 2, 3], fov: 45, near: 0.1, far: 100 }}
           gl={{ antialias: true, alpha: true }}
-          style={{ background: '#0f172a' }}
+          style={{ background: '#1e293b' }}
         >
-          <ambientLight intensity={0.4} />
-          <directionalLight position={[5, 5, 5]} intensity={0.8} />
-          <directionalLight position={[-3, 2, -3]} intensity={0.3} />
+          <ambientLight intensity={0.6} />
+          <directionalLight position={[5, 5, 5]} intensity={1.0} />
+          <directionalLight position={[-3, 2, -3]} intensity={0.5} />
+          <directionalLight position={[0, -2, 0]} intensity={0.2} />
 
           <CameraController inputs={inputs} />
 
