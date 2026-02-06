@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import BeamVisualization3D from '../../components/BeamVisualization3D'
+import BeamVisualization3DCanvas from '../../components/BeamVisualization3DCanvas'
 import {
   Calculator, Cpu, Zap, Box, Ruler, Layers,
   Lightbulb, ArrowRight, ArrowLeft, Eye,
@@ -616,7 +616,7 @@ export default function ImpactCalculator() {
 
           {/* Визуализация */}
           <div className="mt-8">
-            <BeamVisualization3D results={results} inputs={inputs} isAnimating={isAnimating} />
+            <BeamVisualization3DCanvas results={results} inputs={inputs} isAnimating={isAnimating} />
           </div>
 
           {/* Результаты */}
