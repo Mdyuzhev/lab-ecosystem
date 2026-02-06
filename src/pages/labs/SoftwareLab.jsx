@@ -182,13 +182,16 @@ export default function SoftwareLab() {
               </div>
             </Link>
 
-            <div className="glass rounded-xl p-6 opacity-60">
+            <Link
+              to="/labs/software/ai-agents"
+              className="glass rounded-xl p-6 hover:border-emerald-500/30 transition-all group"
+            >
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center">
                   <Brain className="text-emerald-400" size={20} />
                 </div>
                 <div>
-                  <div className="text-xs text-emerald-400 font-medium">Исследование</div>
+                  <div className="text-xs text-emerald-400 font-medium">Исследование &rarr; Методология</div>
                   <h3 className="font-semibold">AI-агенты для QA</h3>
                 </div>
               </div>
@@ -200,8 +203,11 @@ export default function SoftwareLab() {
                 <span className="text-xs px-2 py-1 rounded bg-emerald-500/10 text-emerald-300">MCP</span>
                 <span className="text-xs px-2 py-1 rounded bg-emerald-500/10 text-emerald-300">K8s</span>
               </div>
-              <span className="text-sm text-slate-500">Скоро</span>
-            </div>
+              <div className="flex items-center gap-1 text-emerald-400 text-sm group-hover:gap-2 transition-all">
+                <span>Подробнее</span>
+                <ArrowRight size={14} />
+              </div>
+            </Link>
           </div>
         </div>
       </section>
