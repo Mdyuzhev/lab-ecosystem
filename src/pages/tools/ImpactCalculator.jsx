@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import BeamVisualization3DCanvas from '../../components/BeamVisualization3DCanvas'
@@ -14,7 +14,9 @@ import {
   CheckCircle,
   AlertTriangle,
   XCircle,
+  FileDown,
 } from 'lucide-react'
+import { generateReport } from '../../utils/generateReport'
 
 // Предустановленные материалы
 const MATERIALS = [
@@ -189,6 +191,7 @@ function StressVisualization({ results, inputs, isAnimating }) {
 }
 
 export default function ImpactCalculator() {
+  const vizRef = useRef(null)
   const [inputs, setInputs] = useState({
     // Тип элемента
     elementType: 'beam-cantilever',
@@ -250,6 +253,12 @@ export default function ImpactCalculator() {
   }
 
   // Функция расчёта
+  const exportPDF = () => {
+    if (!results) return
+    const canvasImage = vizRef.current?.getScreenshot() || null
+    generateReport(inputs, results, canvasImage)
+  }
+
   const calculate = () => {
     // Переводим единицы: мм → м, ГПа → Па, МПа → Па
     const L = inputs.length / 1000
@@ -605,18 +614,30 @@ export default function ImpactCalculator() {
             )}
           </div>
 
-          {/* Кнопка расчёта */}
-          <button
-            onClick={calculate}
-            className="w-full py-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 font-semibold text-lg transition-colors flex items-center justify-center gap-2"
-          >
-            <Calculator size={20} />
-            Рассчитать
-          </button>
+          {/* Кнопки расчёта и экспорта */}
+          <div className="flex gap-4">
+            <button
+              onClick={calculate}
+              className="flex-1 py-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 font-semibold text-lg transition-colors flex items-center justify-center gap-2"
+            >
+              <Calculator size={20} />
+              Рассчитать
+            </button>
+
+            {results && (
+              <button
+                onClick={exportPDF}
+                className="px-6 py-4 rounded-xl bg-slate-700 hover:bg-slate-600 font-semibold text-lg transition-colors flex items-center justify-center gap-2"
+              >
+                <FileDown size={20} />
+                PDF
+              </button>
+            )}
+          </div>
 
           {/* Визуализация */}
           <div className="mt-8">
-            <BeamVisualization3DCanvas results={results} inputs={inputs} isAnimating={isAnimating} />
+            <BeamVisualization3DCanvas ref={vizRef} results={results} inputs={inputs} isAnimating={isAnimating} />
           </div>
 
           {/* Результаты */}

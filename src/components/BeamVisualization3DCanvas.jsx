@@ -1,7 +1,7 @@
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls, ContactShadows } from '@react-three/drei'
 import * as THREE from 'three'
-import { useMemo, useRef, useState, useEffect } from 'react'
+import { useMemo, useRef, useState, useEffect, forwardRef, useImperativeHandle } from 'react'
 import { Eye } from 'lucide-react'
 
 // --- Утилиты ---
@@ -395,7 +395,21 @@ function ImpactParticles({ results, inputs, isAnimating }) {
 
 // --- Главный компонент ---
 
-export default function BeamVisualization3DCanvas({ results, inputs, isAnimating }) {
+const BeamVisualization3DCanvas = forwardRef(function BeamVisualization3DCanvas(
+  { results, inputs, isAnimating }, ref
+) {
+  const canvasContainerRef = useRef(null)
+
+  useImperativeHandle(ref, () => ({
+    getScreenshot: () => {
+      const canvas = canvasContainerRef.current?.querySelector('canvas')
+      if (canvas) {
+        return canvas.toDataURL('image/png')
+      }
+      return null
+    }
+  }))
+
   const zoneColor = results?.zoneColor || 'emerald'
   const beamLength = inputs.length * 0.01
 
@@ -417,10 +431,10 @@ export default function BeamVisualization3DCanvas({ results, inputs, isAnimating
         )}
       </h3>
 
-      <div className="bg-slate-950 rounded-xl overflow-hidden relative h-[300px] md:h-[450px]">
+      <div ref={canvasContainerRef} className="bg-slate-950 rounded-xl overflow-hidden relative h-[300px] md:h-[450px]">
         <Canvas
           camera={{ position: [3, 2, 3], fov: 45, near: 0.1, far: 100 }}
-          gl={{ antialias: true, alpha: true }}
+          gl={{ antialias: true, alpha: true, preserveDrawingBuffer: true }}
           style={{ background: '#1e293b' }}
         >
           <ambientLight intensity={0.6} />
@@ -491,4 +505,6 @@ export default function BeamVisualization3DCanvas({ results, inputs, isAnimating
       </div>
     </div>
   )
-}
+})
+
+export default BeamVisualization3DCanvas
