@@ -7,6 +7,7 @@ import SoftwareLab from './pages/labs/SoftwareLab'
 import RoboticsLab from './pages/labs/RoboticsLab'
 import RoboticsCaseVKR from './pages/labs/cases/RoboticsCaseVKR'
 import SoftwareReconciliation from './pages/labs/cases/SoftwareReconciliation'
+import SoftwareDBAToolkit from './pages/labs/cases/SoftwareDBAToolkit'
 import ImpactCalculator from './pages/tools/ImpactCalculator'
 import DataReconciliation from './pages/tools/DataReconciliation'
 import ExplainVisualizer from './pages/tools/ExplainVisualizer'
@@ -29,6 +30,7 @@ function App() {
           <Route path="/labs/robotics" element={<RoboticsLab />} />
           <Route path="/labs/robotics/case-vkr" element={<RoboticsCaseVKR />} />
           <Route path="/labs/software/reconciliation" element={<SoftwareReconciliation />} />
+          <Route path="/labs/software/dba-toolkit" element={<SoftwareDBAToolkit />} />
           <Route path="/outputs/modules" element={<Modules />} />
           <Route path="/outputs/robots" element={<Robots />} />
           <Route path="/outputs/software" element={<Software />} />

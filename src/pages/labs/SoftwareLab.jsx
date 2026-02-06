@@ -155,13 +155,16 @@ export default function SoftwareLab() {
               </div>
             </Link>
 
-            <div className="glass rounded-xl p-6 opacity-60">
+            <Link
+              to="/labs/software/dba-toolkit"
+              className="glass rounded-xl p-6 hover:border-amber-500/30 transition-all group"
+            >
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-lg bg-amber-500/20 flex items-center justify-center">
                   <Database className="text-amber-400" size={20} />
                 </div>
                 <div>
-                  <div className="text-xs text-amber-400 font-medium">В разработке</div>
+                  <div className="text-xs text-amber-400 font-medium">Прототип &rarr; MVP</div>
                   <h3 className="font-semibold">DBA Toolkit</h3>
                 </div>
               </div>
@@ -173,8 +176,11 @@ export default function SoftwareLab() {
                 <span className="text-xs px-2 py-1 rounded bg-amber-500/10 text-amber-300">PostgreSQL</span>
                 <span className="text-xs px-2 py-1 rounded bg-amber-500/10 text-amber-300">DDL Parser</span>
               </div>
-              <span className="text-sm text-slate-500">Скоро</span>
-            </div>
+              <div className="flex items-center gap-1 text-amber-400 text-sm group-hover:gap-2 transition-all">
+                <span>Подробнее</span>
+                <ArrowRight size={14} />
+              </div>
+            </Link>
 
             <div className="glass rounded-xl p-6 opacity-60">
               <div className="flex items-center gap-3 mb-4">
